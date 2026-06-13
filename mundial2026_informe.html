@@ -1,0 +1,2106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mundial 2026 — Informe Analítico</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;600&display=swap');
+
+:root {
+  --bg: #07090f;
+  --card: #0e1420;
+  --card2: #131d2e;
+  --border: #1a2540;
+  --border2: #243050;
+  --gold: #f0b429;
+  --gold-dim: #a87a1a;
+  --green: #16a34a;
+  --green-bg: #041a0e;
+  --green-text: #4ade80;
+  --yellow: #ca8a04;
+  --yellow-bg: #2a1800;
+  --yellow-text: #fde047;
+  --red: #dc2626;
+  --red-bg: #1f0505;
+  --red-text: #f87171;
+  --blue: #3b82f6;
+  --blue-dim: #1d4ed8;
+  --text: #dde6f0;
+  --text-dim: #8496b0;
+  --muted: #4a5f7a;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* ══ HEADER ══ */
+header {
+  background: linear-gradient(180deg, #0b1120 0%, #07090f 100%);
+  border-bottom: 2px solid var(--gold);
+  padding: 22px 20px 16px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.7);
+}
+.header-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+header h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(20px, 5vw, 38px);
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-shadow: 0 0 40px rgba(240,180,41,0.35);
+}
+.header-sub {
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 5px;
+  letter-spacing: 0.5px;
+}
+
+/* ══ NAV TABS ══ */
+.nav-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 10px 14px;
+  background: #090d17;
+  border-bottom: 1px solid var(--border);
+  justify-content: center;
+}
+.tab-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 1px;
+  padding: 6px 13px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.18s;
+  text-transform: uppercase;
+}
+.tab-btn:hover { border-color: var(--gold); color: var(--gold); }
+.tab-btn.active { background: var(--gold); color: #07090f; border-color: var(--gold); font-weight: 900; }
+
+/* ══ LAYOUT ══ */
+.content {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.section { display: none; }
+.section.active { display: block; }
+
+/* ══ DISCLAIMER ══ */
+.disclaimer {
+  margin: 12px 0;
+  padding: 10px 14px;
+  background: #12100a;
+  border-left: 3px solid var(--gold);
+  border-radius: 0 5px 5px 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+.disclaimer strong { color: var(--gold); }
+
+/* ══ LEGEND ══ */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin: 10px 0;
+  font-size: 11px;
+  align-items: center;
+}
+.legend-title { color: var(--text); font-weight: 600; font-size: 12px; width: 100%; }
+.legend-item { display: flex; align-items: center; gap: 5px; }
+.legend-dot { width: 11px; height: 11px; border-radius: 2px; flex-shrink: 0; }
+
+/* ══ SOURCE BAR ══ */
+.source-bar {
+  margin-top: 10px;
+  padding: 7px 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  font-size: 11px;
+  color: var(--muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+.source-bar strong { color: var(--blue); }
+
+/* ══════════════════════════════════════════════════
+   GROUPS OVERVIEW (landing page)
+══════════════════════════════════════════════════ */
+.groups-intro {
+  text-align: center;
+  padding: 20px 0 12px;
+}
+.groups-intro h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.groups-intro p {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.groups-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.group-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.15s;
+}
+.group-card:hover {
+  border-color: var(--gold-dim);
+  transform: translateY(-2px);
+}
+
+.group-card-header {
+  background: #0b1220;
+  border-bottom: 1px solid var(--border);
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.group-letter {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+}
+.group-host-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 2px 7px;
+  border-radius: 3px;
+  background: rgba(240,180,41,0.15);
+  color: var(--gold);
+  border: 1px solid rgba(240,180,41,0.3);
+  text-transform: uppercase;
+}
+
+.group-teams {
+  padding: 8px 0;
+}
+.group-team-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-bottom: 1px solid #0f1828;
+  transition: background 0.12s;
+}
+.group-team-row:last-child { border-bottom: none; }
+.group-team-row:hover { background: #111d30; }
+
+.team-crest {
+  font-size: 22px;
+  line-height: 1;
+  flex-shrink: 0;
+  width: 28px;
+  text-align: center;
+}
+.team-info { flex: 1; min-width: 0; }
+.team-name-g {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.team-conf {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.5px;
+}
+.team-seed {
+  font-size: 11px;
+  font-weight: 700;
+  width: 32px;
+  text-align: right;
+  flex-shrink: 0;
+}
+.seed-1 { color: var(--gold); }
+.seed-2 { color: #94a3b8; }
+.seed-3 { color: #64748b; }
+.seed-4 { color: #475569; }
+
+.host-marker {
+  font-size: 9px;
+  padding: 1px 5px;
+  background: rgba(240,180,41,0.12);
+  color: var(--gold);
+  border-radius: 3px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+/* ══ CONF HEADER ══ */
+.conf-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0 10px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 18px;
+}
+.conf-badge {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 11px;
+  letter-spacing: 2px;
+  padding: 4px 10px;
+  border-radius: 3px;
+  background: var(--gold);
+  color: #07090f;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+.conf-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+}
+.conf-meta { color: var(--muted); font-size: 12px; }
+
+/* ══ SECTION INTRO ══ */
+.section-intro {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 14px;
+  padding: 10px 14px;
+  background: var(--card);
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  line-height: 1.6;
+}
+
+/* ══ GROUP DIVIDER ══ */
+.group-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 22px 0 10px;
+}
+.group-divider-letter {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--gold);
+  letter-spacing: 2px;
+  background: rgba(240,180,41,0.1);
+  border: 1px solid rgba(240,180,41,0.25);
+  padding: 3px 10px;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+.group-divider-teams {
+  font-size: 12px;
+  color: var(--muted);
+}
+.group-divider-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ══ TABLE ══ */
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 7px;
+  border: 1px solid var(--border);
+  margin-bottom: 6px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 960px;
+}
+thead tr { background: #090e1a; }
+thead th {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 9px 8px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+thead th:first-child { text-align: left; padding-left: 12px; min-width: 190px; }
+tbody tr { border-bottom: 1px solid #0e1828; transition: background 0.12s; }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: #101c2e; }
+td {
+  padding: 8px 8px;
+  text-align: center;
+  font-size: 13px;
+  vertical-align: middle;
+}
+td:first-child { text-align: left; padding-left: 12px; }
+
+/* ══ TEAM CELL ══ */
+.team-cell {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.crest {
+  font-size: 26px;
+  line-height: 1;
+  flex-shrink: 0;
+  width: 32px;
+  text-align: center;
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.5));
+}
+.team-label {}
+.team-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+}
+.team-sub {
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.2;
+}
+
+/* ══ PROB PILLS ══ */
+.prob-cell { display: flex; gap: 3px; justify-content: center; flex-wrap: wrap; }
+.prob-pill {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 3px;
+  white-space: nowrap;
+  letter-spacing: 0.3px;
+}
+.prob-w { background: var(--green-bg); color: var(--green-text); border: 1px solid #0a3d1e; }
+.prob-d { background: var(--yellow-bg); color: var(--yellow-text); border: 1px solid #3a2200; }
+.prob-l { background: var(--red-bg); color: var(--red-text); border: 1px solid #3a0808; }
+
+/* ══ COLOR CELLS ══ */
+.c-green { background: var(--green-bg); color: var(--green-text); font-weight: 600; }
+.c-yellow { background: var(--yellow-bg); color: var(--yellow-text); font-weight: 600; }
+.c-red { background: var(--red-bg); color: var(--red-text); font-weight: 600; }
+
+/* ══ FORM ══ */
+.form-seq { display: flex; gap: 3px; justify-content: center; }
+.fb {
+  width: 17px; height: 17px;
+  border-radius: 3px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+.fb-w { background: var(--green); color: #fff; }
+.fb-d { background: #5a3a00; color: #fde047; }
+.fb-l { background: var(--red); color: #fff; }
+
+/* ══ OVER/UNDER ══ */
+.ou { font-size: 10px; font-weight: 700; padding: 2px 5px; border-radius: 3px; }
+.ou-over { background: #041a0e; color: #4ade80; border: 1px solid #0a3a1e; }
+.ou-under { background: #1f0505; color: #f87171; border: 1px solid #3a0808; }
+
+/* ══ DATO CALIENTE ══ */
+.dato {
+  font-size: 11px;
+  color: #f0b429cc;
+  font-style: italic;
+  max-width: 210px;
+  text-align: left;
+  line-height: 1.4;
+}
+.dato strong { color: var(--gold); font-style: normal; font-weight: 700; }
+
+/* ══ PICK ARRIESGADO ══ */
+.pick-bold {
+  font-size: 11px;
+  text-align: left;
+  line-height: 1.45;
+  max-width: 200px;
+  padding: 2px 0;
+}
+.pick-tag {
+  display: inline-block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  padding: 2px 7px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.pick-tag-fire  { background: #2a1000; color: #fb923c; border: 1px solid #7c2d0c; }
+.pick-tag-bomb  { background: #1a0030; color: #c084fc; border: 1px solid #6b21a8; }
+.pick-tag-ice   { background: #001a2a; color: #38bdf8; border: 1px solid #075985; }
+.pick-desc { color: #c0ccda; font-weight: 500; }
+.pick-odds { color: #fb923c; font-weight: 700; }
+
+/* ══ TOP PICKS ══ */
+.picks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+.pick-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.pick-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.pick-card.gold::before { background: linear-gradient(90deg, var(--gold), #fff6cc); }
+.pick-card.silver::before { background: linear-gradient(90deg, #94a3b8, #64748b); }
+.pick-card.bronze::before { background: linear-gradient(90deg, #b45309, #d97706); }
+.pick-card.blue::before { background: linear-gradient(90deg, var(--blue), #60a5fa); }
+
+.pick-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 52px;
+  font-weight: 900;
+  color: #0e1420;
+  position: absolute;
+  right: 10px;
+  top: 2px;
+  line-height: 1;
+  pointer-events: none;
+}
+.pick-crest { font-size: 32px; margin-bottom: 4px; }
+.pick-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--gold);
+  letter-spacing: 1px;
+}
+.pick-meta { font-size: 11px; color: var(--muted); margin-bottom: 8px; }
+.pick-stat {
+  font-size: 11px;
+  color: var(--green-text);
+  padding: 5px 8px;
+  background: var(--green-bg);
+  border-radius: 4px;
+  margin-bottom: 5px;
+  font-weight: 600;
+  border: 1px solid #0a3d1e;
+}
+.pick-dato {
+  font-size: 11px;
+  color: #f0b429bb;
+  font-style: italic;
+  line-height: 1.4;
+  margin-top: 6px;
+}
+
+/* ══ STATS BOX ══ */
+.stats-boxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 10px;
+  margin-top: 20px;
+}
+.stat-box {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+  .groups-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+  .crest { font-size: 22px; width: 26px; }
+  .team-name { font-size: 13px; }
+  td { padding: 7px 5px; font-size: 11px; }
+  thead th { font-size: 9px; padding: 7px 5px; }
+  .pick-card { padding: 12px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-eyebrow">Análisis Deportivo · Para entretenimiento</div>
+  <h1>⚽ Mundial 2026 — Informe por Grupos</h1>
+  <div class="header-sub">Datos reales de últimos ~20 partidos · FotMob · Goal.com · ESPN · Sofascore · FlashScore · Consulta: 12 jun 2026</div>
+</header>
+
+<nav class="nav-tabs">
+  <button class="tab-btn active" onclick="showTab('grupos')">🗺️ GRUPOS</button>
+  <button class="tab-btn" onclick="showTab('conmebol')">🌎 CONMEBOL</button>
+  <button class="tab-btn" onclick="showTab('uefatop')">🏆 UEFA Top</button>
+  <button class="tab-btn" onclick="showTab('uefarest')">⚽ UEFA Resto</button>
+  <button class="tab-btn" onclick="showTab('caf')">🌍 CAF</button>
+  <button class="tab-btn" onclick="showTab('afc')">🌏 AFC</button>
+  <button class="tab-btn" onclick="showTab('concacaf')">🌐 CONCACAF</button>
+  <button class="tab-btn" onclick="showTab('toppicks')">🔥 TOP PICKS</button>
+</nav>
+
+<div class="content">
+
+<div class="legend">
+  <span class="legend-title">📋 CÓDIGO DE COLORES</span>
+  <div class="legend-item"><div class="legend-dot" style="background:#16a34a"></div><span style="color:#4ade80">VERDE = Favorable / Victoria / Dato positivo</span></div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ca8a04"></div><span style="color:#fde047">AMARILLO = Neutro / Empate / Precaución</span></div>
+  <div class="legend-item"><div class="legend-dot" style="background:#dc2626"></div><span style="color:#f87171">ROJO = Desfavorable / Derrota / Alerta</span></div>
+  <div class="legend-item"><div class="legend-dot" style="background:#f0b429"></div><span style="color:#f0b429">🔥 Dato Caliente = Stat más destacada del equipo</span></div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     VISTA GRUPOS (landing)
+════════════════════════════════════════════ -->
+<section id="grupos" class="section active">
+
+  <div class="groups-intro">
+    <h2>🌍 Los 12 Grupos del Mundial 2026</h2>
+    <p>48 equipos · 12 grupos de 4 · Top 2 + 8 mejores terceros avanzan al Round of 32</p>
+  </div>
+
+  <div class="groups-grid">
+
+    <!-- GRUPO A -->
+    <div class="group-card">
+      <div class="group-card-header">
+        <div class="group-letter">A</div>
+        <div>
+          <div style="font-size:11px;color:var(--muted)">Ciudad de México · Dallas</div>
+          <span class="group-host-badge">Anfitrión: México</span>
+        </div>
+      </div>
+      <div class="group-teams">
+        <div class="group-team-row">
+          <div class="team-crest">🇲🇽</div>
+          <div class="team-info"><div class="team-name-g">México</div><div class="team-conf">CONCACAF</div></div>
+          <span class="host-marker">HOST</span>
+          <div class="team-seed seed-1">#1</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇰🇷</div>
+          <div class="team-info"><div class="team-name-g">Corea del Sur</div><div class="team-conf">AFC</div></div>
+          <div class="team-seed seed-2">#2</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇿🇦</div>
+          <div class="team-info"><div class="team-name-g">Sudáfrica</div><div class="team-conf">CAF</div></div>
+          <div class="team-seed seed-3">#3</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇨🇿</div>
+          <div class="team-info"><div class="team-name-g">Chequia</div><div class="team-conf">UEFA</div></div>
+          <div class="team-seed seed-4">#4</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRUPO B -->
+    <div class="group-card">
+      <div class="group-card-header">
+        <div class="group-letter">B</div>
+        <div>
+          <div style="font-size:11px;color:var(--muted)">Toronto · Vancouver</div>
+          <span class="group-host-badge">Anfitrión: Canadá</span>
+        </div>
+      </div>
+      <div class="group-teams">
+        <div class="group-team-row">
+          <div class="team-crest">🇨🇦</div>
+          <div class="team-info"><div class="team-name-g">Canadá</div><div class="team-conf">CONCACAF</div></div>
+          <span class="host-marker">HOST</span>
+          <div class="team-seed seed-1">#1</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇨🇭</div>
+          <div class="team-info"><div class="team-name-g">Suiza</div><div class="team-conf">UEFA</div></div>
+          <div class="team-seed seed-2">#2</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇶🇦</div>
+          <div class="team-info"><div class="team-name-g">Qatar</div><div class="team-conf">AFC</div></div>
+          <div class="team-seed seed-3">#3</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇧🇦</div>
+          <div class="team-info"><div class="team-name-g">Bosnia</div><div class="team-conf">UEFA</div></div>
+          <div class="team-seed seed-4">#4</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRUPO C -->
+    <div class="group-card">
+      <div class="group-card-header">
+        <div class="group-letter">C</div>
+        <div>
+          <div style="font-size:11px;color:var(--muted)">Boston · Miami</div>
+          <div style="font-size:10px;color:#f87171;font-weight:700">★ Grupo de la Muerte</div>
+        </div>
+      </div>
+      <div class="group-teams">
+        <div class="group-team-row">
+          <div class="team-crest">🇧🇷</div>
+          <div class="team-info"><div class="team-name-g">Brasil</div><div class="team-conf">CONMEBOL</div></div>
+          <div class="team-seed seed-1">#1</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇲🇦</div>
+          <div class="team-info"><div class="team-name-g">Marruecos</div><div class="team-conf">CAF</div></div>
+          <div class="team-seed seed-2">#2</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🏴󠁧󠁢󠁳󠁣󠁴󠁿</div>
+          <div class="team-info"><div class="team-name-g">Escocia</div><div class="team-conf">UEFA</div></div>
+          <div class="team-seed seed-3">#3</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇭🇹</div>
+          <div class="team-info"><div class="team-name-g">Haití</div><div class="team-conf">CONCACAF</div></div>
+          <div class="team-seed seed-4">#4</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRUPO D -->
+    <div class="group-card">
+      <div class="group-card-header">
+        <div class="group-letter">D</div>
+        <div>
+          <div style="font-size:11px;color:var(--muted)">Los Ángeles · Seattle</div>
+          <span class="group-host-badge">Anfitrión: EE.UU.</span>
+        </div>
+      </div>
+      <div class="group-teams">
+        <div class="group-team-row">
+          <div class="team-crest">🇺🇸</div>
+          <div class="team-info"><div class="team-name-g">EE.UU.</div><div class="team-conf">CONCACAF</div></div>
+          <span class="host-marker">HOST</span>
+          <div class="team-seed seed-1">#1</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇵🇾</div>
+          <div class="team-info"><div class="team-name-g">Paraguay</div><div class="team-conf">CONMEBOL</div></div>
+          <div class="team-seed seed-2">#2</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇦🇺</div>
+          <div class="team-info"><div class="team-name-g">Australia</div><div class="team-conf">AFC</div></div>
+          <div class="team-seed seed-3">#3</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇹🇷</div>
+          <div class="team-info"><div class="team-name-g">Türkiye</div><div class="team-conf">UEFA</div></div>
+          <div class="team-seed seed-4">#4</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRUPO E -->
+    <div class="group-card">
+      <div class="group-card-header">
+        <div class="group-letter">E</div>
+        <div>
+          <div style="font-size:11px;color:var(--muted)">Houston · San Francisco</div>
+        </div>
+      </div>
+      <div class="group-teams">
+        <div class="group-team-row">
+          <div class="team-crest">🇩🇪</div>
+          <div class="team-info"><div class="team-name-g">Alemania</div><div class="team-conf">UEFA</div></div>
+          <div class="team-seed seed-1">#1</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇪🇨</div>
+          <div class="team-info"><div class="team-name-g">Ecuador</div><div class="team-conf">CONMEBOL</div></div>
+          <div class="team-seed seed-2">#2</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇨🇮</div>
+          <div class="team-info"><div class="team-name-g">Costa de Marfil</div><div class="team-conf">CAF</div></div>
+          <div class="team-seed seed-3">#3</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇨🇼</div>
+          <div class="team-info"><div class="team-name-g">Curazao</div><div class="team-conf">CONCACAF</div></div>
+          <div class="team-seed seed-4">#4</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRUPO F -->
+    <div class="group-card">
+      <div class="group-card-header">
+        <div class="group-letter">F</div>
+        <div>
+          <div style="font-size:11px;color:var(--muted)">Kansas City · Atlanta</div>
+        </div>
+      </div>
+      <div class="group-teams">
+        <div class="group-team-row">
+          <div class="team-crest">🇳🇱</div>
+          <div class="team-info"><div class="team-name-g">Países Bajos</div><div class="team-conf">UEFA</div></div>
+          <div class="team-seed seed-1">#1</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇯🇵</div>
+          <div class="team-info"><div class="team-name-g">Japón</div><div class="team-conf">AFC</div></div>
+          <div class="team-seed seed-2">#2</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇸🇪</div>
+          <div class="team-info"><div class="team-name-g">Suecia</div><div class="team-conf">UEFA</div></div>
+          <div class="team-seed seed-3">#3</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇹🇳</div>
+          <div class="team-info"><div class="team-name-g">Túnez</div><div class="team-conf">CAF</div></div>
+          <div class="team-seed seed-4">#4</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRUPO G -->
+    <div class="group-card">
+      <div class="group-card-header">
+        <div class="group-letter">G</div>
+        <div>
+          <div style="font-size:11px;color:var(--muted)">Vancouver · Los Ángeles</div>
+          <div style="font-size:10px;color:#4ade80;font-weight:700">✦ Grupo más fácil</div>
+        </div>
+      </div>
+      <div class="group-teams">
+        <div class="group-team-row">
+          <div class="team-crest">🇧🇪</div>
+          <div class="team-info"><div class="team-name-g">Bélgica</div><div class="team-conf">UEFA</div></div>
+          <div class="team-seed seed-1">#1</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇪🇬</div>
+          <div class="team-info"><div class="team-name-g">Egipto</div><div class="team-conf">CAF</div></div>
+          <div class="team-seed seed-2">#2</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇮🇷</div>
+          <div class="team-info"><div class="team-name-g">Irán</div><div class="team-conf">AFC</div></div>
+          <div class="team-seed seed-3">#3</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇳🇿</div>
+          <div class="team-info"><div class="team-name-g">Nueva Zelanda</div><div class="team-conf">OFC</div></div>
+          <div class="team-seed seed-4">#4</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRUPO H -->
+    <div class="group-card">
+      <div class="group-card-header">
+        <div class="group-letter">H</div>
+        <div>
+          <div style="font-size:11px;color:var(--muted)">Atlanta · Miami</div>
+          <div style="font-size:10px;color:#f0b429;font-weight:700">España en su grupo</div>
+        </div>
+      </div>
+      <div class="group-teams">
+        <div class="group-team-row">
+          <div class="team-crest">🇪🇸</div>
+          <div class="team-info"><div class="team-name-g">España</div><div class="team-conf">UEFA · #1 FIFA</div></div>
+          <div class="team-seed seed-1">#1</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇺🇾</div>
+          <div class="team-info"><div class="team-name-g">Uruguay</div><div class="team-conf">CONMEBOL</div></div>
+          <div class="team-seed seed-2">#2</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇸🇦</div>
+          <div class="team-info"><div class="team-name-g">Arabia Saudí</div><div class="team-conf">AFC</div></div>
+          <div class="team-seed seed-3">#3</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇨🇻</div>
+          <div class="team-info"><div class="team-name-g">Cabo Verde</div><div class="team-conf">CAF</div></div>
+          <div class="team-seed seed-4">#4</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRUPO I -->
+    <div class="group-card">
+      <div class="group-card-header">
+        <div class="group-letter">I</div>
+        <div>
+          <div style="font-size:11px;color:var(--muted)">Nueva York · Filadelfia</div>
+          <div style="font-size:10px;color:#f87171;font-weight:700">Francia en su grupo</div>
+        </div>
+      </div>
+      <div class="group-teams">
+        <div class="group-team-row">
+          <div class="team-crest">🇫🇷</div>
+          <div class="team-info"><div class="team-name-g">Francia</div><div class="team-conf">UEFA · #3 FIFA</div></div>
+          <div class="team-seed seed-1">#1</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇸🇳</div>
+          <div class="team-info"><div class="team-name-g">Senegal</div><div class="team-conf">CAF</div></div>
+          <div class="team-seed seed-2">#2</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇳🇴</div>
+          <div class="team-info"><div class="team-name-g">Noruega</div><div class="team-conf">UEFA</div></div>
+          <div class="team-seed seed-3">#3</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇮🇶</div>
+          <div class="team-info"><div class="team-name-g">Irak</div><div class="team-conf">AFC</div></div>
+          <div class="team-seed seed-4">#4</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRUPO J -->
+    <div class="group-card">
+      <div class="group-card-header">
+        <div class="group-letter">J</div>
+        <div>
+          <div style="font-size:11px;color:var(--muted)">Kansas City · Santa Clara</div>
+          <div style="font-size:10px;color:#f0b429;font-weight:700">Argentina defiende título</div>
+        </div>
+      </div>
+      <div class="group-teams">
+        <div class="group-team-row">
+          <div class="team-crest">🇦🇷</div>
+          <div class="team-info"><div class="team-name-g">Argentina</div><div class="team-conf">CONMEBOL · #2 FIFA</div></div>
+          <div class="team-seed seed-1">#1</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇩🇿</div>
+          <div class="team-info"><div class="team-name-g">Argelia</div><div class="team-conf">CAF</div></div>
+          <div class="team-seed seed-2">#2</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇦🇹</div>
+          <div class="team-info"><div class="team-name-g">Austria</div><div class="team-conf">UEFA</div></div>
+          <div class="team-seed seed-3">#3</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇯🇴</div>
+          <div class="team-info"><div class="team-name-g">Jordania</div><div class="team-conf">AFC</div></div>
+          <div class="team-seed seed-4">#4</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRUPO K -->
+    <div class="group-card">
+      <div class="group-card-header">
+        <div class="group-letter">K</div>
+        <div>
+          <div style="font-size:11px;color:var(--muted)">Houston · Ciudad de México</div>
+        </div>
+      </div>
+      <div class="group-teams">
+        <div class="group-team-row">
+          <div class="team-crest">🇵🇹</div>
+          <div class="team-info"><div class="team-name-g">Portugal</div><div class="team-conf">UEFA</div></div>
+          <div class="team-seed seed-1">#1</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇨🇴</div>
+          <div class="team-info"><div class="team-name-g">Colombia</div><div class="team-conf">CONMEBOL</div></div>
+          <div class="team-seed seed-2">#2</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇨🇩</div>
+          <div class="team-info"><div class="team-name-g">DR Congo</div><div class="team-conf">CAF</div></div>
+          <div class="team-seed seed-3">#3</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇺🇿</div>
+          <div class="team-info"><div class="team-name-g">Uzbekistán</div><div class="team-conf">AFC</div></div>
+          <div class="team-seed seed-4">#4</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRUPO L -->
+    <div class="group-card">
+      <div class="group-card-header">
+        <div class="group-letter">L</div>
+        <div>
+          <div style="font-size:11px;color:var(--muted)">Dallas · Toronto</div>
+        </div>
+      </div>
+      <div class="group-teams">
+        <div class="group-team-row">
+          <div class="team-crest">🏴󠁧󠁢󠁥󠁮󠁧󠁿</div>
+          <div class="team-info"><div class="team-name-g">Inglaterra</div><div class="team-conf">UEFA · #4 FIFA</div></div>
+          <div class="team-seed seed-1">#1</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇭🇷</div>
+          <div class="team-info"><div class="team-name-g">Croacia</div><div class="team-conf">UEFA</div></div>
+          <div class="team-seed seed-2">#2</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇬🇭</div>
+          <div class="team-info"><div class="team-name-g">Ghana</div><div class="team-conf">CAF</div></div>
+          <div class="team-seed seed-3">#3</div>
+        </div>
+        <div class="group-team-row">
+          <div class="team-crest">🇵🇦</div>
+          <div class="team-info"><div class="team-name-g">Panamá</div><div class="team-conf">CONCACAF</div></div>
+          <div class="team-seed seed-4">#4</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /groups-grid -->
+
+  <div class="disclaimer">
+    <strong>⚠️ AVISO:</strong> Las probabilidades V/E/D en las pestañas estadísticas son <strong>estimaciones propias</strong> basadas en forma reciente y nivel de rivales, <strong>NO son datos oficiales.</strong> Esto es solo para entretenimiento entre amigos. No constituye asesoramiento de apuestas.
+  </div>
+
+  <div class="source-bar">
+    <span>📊 Fuentes: <strong>NBC Sports</strong> · <strong>ESPN</strong> · <strong>CBS Sports</strong> · <strong>Yahoo Sports</strong> · <strong>FotMob</strong> · <strong>Goal.com</strong> · <strong>FlashScore</strong></span>
+    <span>Consulta: 12 junio 2026</span>
+  </div>
+
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     CONMEBOL
+════════════════════════════════════════════ -->
+<section id="conmebol" class="section">
+  <div class="conf-header">
+    <span class="conf-badge">CONMEBOL</span>
+    <div>
+      <div class="conf-title">Sudamérica — 6 equipos</div>
+      <div class="conf-meta">Grupos C · D · E · H · J · K</div>
+    </div>
+  </div>
+  <div class="section-intro">
+    Argentina llega como <strong style="color:var(--gold)">campeón defensor</strong> (FIFA #2) y Messi regresó de lesión con gol el 9 jun. Brasil (FIFA #5) irregular bajo Ancelotti. Colombia en gran racha histórica. Uruguay en grupo durísimo con España. Ecuador y Paraguay como candidatos a la sorpresa.
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>EQUIPO</th>
+          <th>GRP</th>
+          <th>FIFA</th>
+          <th>EST. V / E / D %</th>
+          <th>GF/PJ</th>
+          <th>GC/PJ</th>
+          <th>O2.5</th>
+          <th>BTTS%</th>
+          <th>Crnrs⊕</th>
+          <th>Tarj avg</th>
+          <th>Posesión</th>
+          <th>Ult. 5</th>
+          <th>🔥 DATO CALIENTE</th>
+          <th>🎯 PICK ARRIESGADO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇦🇷</span><div class="team-label"><div class="team-name">Argentina</div><div class="team-sub">Campeón defensor</div></div></div></td>
+          <td class="c-green">J</td><td class="c-green">#2</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 67%</span><span class="prob-pill prob-d">E 20%</span><span class="prob-pill prob-l">D 13%</span></div></td>
+          <td class="c-green">2.4</td><td class="c-green">0.6</td>
+          <td><span class="ou ou-over">OVER</span></td>
+          <td class="c-yellow">40%</td>
+          <td class="c-green">5.8</td>
+          <td class="c-green">2.9 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-green">54%</td>
+          <td><div class="form-seq"><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-l">P</div></div></td>
+          <td class="dato"><strong>Marcó en 18/20 partidos recientes.</strong> Messi volvió de lesión con gol vs Islandia (9 jun 2026).</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-fire">🔥 FUEGO</span><br><span class="pick-desc">Argentina gana por <span class="pick-odds">+2.5 goles</span> vs Jordania.<br>Messi anota en partido inaugural.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇧🇷</span><div class="team-label"><div class="team-name">Brasil</div><div class="team-sub">Ancelotti DT · 5× campeón</div></div></div></td>
+          <td class="c-yellow">C</td><td class="c-green">#5</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 58%</span><span class="prob-pill prob-d">E 22%</span><span class="prob-pill prob-l">D 20%</span></div></td>
+          <td class="c-yellow">1.9</td><td class="c-yellow">1.2</td>
+          <td><span class="ou ou-over">OVER</span></td>
+          <td class="c-yellow">50%</td>
+          <td class="c-yellow">5.2</td>
+          <td class="c-yellow">3.2 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-green">57%</td>
+          <td><div class="form-seq"><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-d">E</div><div class="fb fb-l">P</div><div class="fb fb-l">P</div></div></td>
+          <td class="dato"><strong>Solo 2G en últimos 5.</strong> Perdió vs Bolivia, Japón y Francia en 2025–26. Ancelotti debut en mundial.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-bomb">💣 BOMBA</span><br><span class="pick-desc">Brasil pierde o empata al menos <span class="pick-odds">1 partido</span> de grupo.<br>BTTS en partido vs Marruecos.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇨🇴</span><div class="team-label"><div class="team-name">Colombia</div><div class="team-sub">28 partidos invicta 2024</div></div></div></td>
+          <td class="c-yellow">K</td><td class="c-yellow">#14</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 45%</span><span class="prob-pill prob-d">E 28%</span><span class="prob-pill prob-l">D 27%</span></div></td>
+          <td class="c-green">2.1</td><td class="c-yellow">1.1</td>
+          <td><span class="ou ou-over">OVER</span></td>
+          <td class="c-yellow">48%</td>
+          <td class="c-yellow">5.0</td>
+          <td class="c-yellow">3.3 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-yellow">51%</td>
+          <td><div class="form-seq"><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-d">E</div><div class="fb fb-w">G</div></div></td>
+          <td class="dato"><strong>Invicta 28 partidos en 2024</strong> (récord histórico). Luis Díaz en plenitud. Grupo K con Portugal.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-fire">🔥 FUEGO</span><br><span class="pick-desc">Colombia pasa como <span class="pick-odds">2da de grupo</span> y Luis Díaz anota<br>en su primer partido del torneo.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇺🇾</span><div class="team-label"><div class="team-name">Uruguay</div><div class="team-sub">Celeste histórica</div></div></div></td>
+          <td class="c-red">H</td><td class="c-yellow">#15</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 35%</span><span class="prob-pill prob-d">E 30%</span><span class="prob-pill prob-l">D 35%</span></div></td>
+          <td class="c-yellow">1.5</td><td class="c-yellow">1.1</td>
+          <td><span class="ou ou-under">UNDER</span></td>
+          <td class="c-red">35%</td>
+          <td class="c-yellow">4.8</td>
+          <td class="c-yellow">3.4 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-yellow">48%</td>
+          <td><div class="form-seq"><div class="fb fb-l">P</div><div class="fb fb-d">E</div><div class="fb fb-w">G</div><div class="fb fb-d">E</div><div class="fb fb-l">P</div></div></td>
+          <td class="dato"><strong>Grupo H con España (#1 FIFA).</strong> UNDER 2.5 en 12/20 partidos. La defensa salva al equipo.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-ice">🧊 FRÍO</span><br><span class="pick-desc">Uruguay vs Arabia Saudí termina <span class="pick-odds">UNDER 1.5</span>.<br>Celeste gana con gol en contra solo.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇪🇨</span><div class="team-label"><div class="team-name">Ecuador</div><div class="team-sub">Venció a Argentina</div></div></div></td>
+          <td class="c-red">E</td><td class="c-yellow">#32</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 28%</span><span class="prob-pill prob-d">E 30%</span><span class="prob-pill prob-l">D 42%</span></div></td>
+          <td class="c-yellow">1.6</td><td class="c-yellow">1.4</td>
+          <td><span class="ou ou-under">UNDER</span></td>
+          <td class="c-yellow">45%</td>
+          <td class="c-yellow">4.6</td>
+          <td class="c-yellow">3.5 <small style="color:var(--muted)">O3.5</small></td>
+          <td class="c-red">44%</td>
+          <td><div class="form-seq"><div class="fb fb-w">G</div><div class="fb fb-l">P</div><div class="fb fb-d">E</div><div class="fb fb-l">P</div><div class="fb fb-w">G</div></div></td>
+          <td class="dato"><strong>Le ganó 1-0 a Argentina</strong> en eliminatorias (sep 2025). Grupo E con Alemania es cuesta arriba.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-bomb">💣 BOMBA</span><br><span class="pick-desc">Ecuador + Alemania: <span class="pick-odds">partido con BTTS</span>.<br>Ecuador roba un empate vs Costa de Marfil.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇵🇾</span><div class="team-label"><div class="team-name">Paraguay</div><div class="team-sub">Clasificó ajustado</div></div></div></td>
+          <td class="c-red">D</td><td class="c-yellow">#50</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 28%</span><span class="prob-pill prob-d">E 32%</span><span class="prob-pill prob-l">D 40%</span></div></td>
+          <td class="c-yellow">1.3</td><td class="c-yellow">1.4</td>
+          <td><span class="ou ou-under">UNDER</span></td>
+          <td class="c-red">35%</td>
+          <td class="c-yellow">4.5</td>
+          <td class="c-red">4.2 <small style="color:var(--muted)">O3.5</small></td>
+          <td class="c-red">42%</td>
+          <td><div class="form-seq"><div class="fb fb-d">E</div><div class="fb fb-l">P</div><div class="fb fb-d">E</div><div class="fb fb-w">G</div><div class="fb fb-l">P</div></div></td>
+          <td class="dato"><strong>Solo 6 victorias en 20 partidos.</strong> Grupo D: EE.UU. + Türkiye como rivales duros. Perfil muy bajo.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-ice">🧊 FRÍO</span><br><span class="pick-desc">Paraguay + EE.UU.: <span class="pick-odds">UNDER 2.5</span> y menos<br>de 8 corners totales en el partido.</span></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="source-bar">
+    <span>📊 Fuentes: <strong>FotMob</strong> · <strong>Goal.com</strong> · <strong>ESPN</strong> · <strong>WorldSoccerTalk</strong></span>
+    <span>Consulta: 12 jun 2026</span>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     UEFA TOP
+════════════════════════════════════════════ -->
+<section id="uefatop" class="section">
+  <div class="conf-header">
+    <span class="conf-badge">UEFA</span>
+    <div>
+      <div class="conf-title">Europa — Grandes Potencias</div>
+      <div class="conf-meta">España · Francia · Alemania · Inglaterra · Portugal · Países Bajos</div>
+    </div>
+  </div>
+  <div class="section-intro">
+    El bloque más poderoso del torneo. <strong style="color:var(--gold)">España (#1)</strong> llega como campeona de Europa 2024. Francia profunda con Mbappe + Olise + Doué. Alemania en resurgimiento. Inglaterra con dudas ofensivas bajo Tuchel. Portugal con CR7 en posible último Mundial. Países Bajos sólidos.
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>EQUIPO</th>
+          <th>GRP</th>
+          <th>FIFA</th>
+          <th>EST. V / E / D %</th>
+          <th>GF/PJ</th>
+          <th>GC/PJ</th>
+          <th>O2.5</th>
+          <th>BTTS%</th>
+          <th>Crnrs⊕</th>
+          <th>Tarj avg</th>
+          <th>Posesión</th>
+          <th>Ult. 5</th>
+          <th>🔥 DATO CALIENTE</th>
+          <th>🎯 PICK ARRIESGADO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇪🇸</span><div class="team-label"><div class="team-name">España</div><div class="team-sub">🥇 Campeona Euro 2024</div></div></div></td>
+          <td class="c-green">H</td><td class="c-green">#1</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 70%</span><span class="prob-pill prob-d">E 19%</span><span class="prob-pill prob-l">D 11%</span></div></td>
+          <td class="c-green">2.5</td><td class="c-green">0.8</td>
+          <td><span class="ou ou-over">OVER</span></td>
+          <td class="c-yellow">50%</td>
+          <td class="c-green">6.2</td>
+          <td class="c-green">3.0 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-green">64%</td>
+          <td><div class="form-seq"><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-w">G</div></div></td>
+          <td class="dato"><strong>5G seguidas.</strong> Venció a Perú 3-1 (9 jun 2026). Yamal lesión menor, se espera vs Cabo Verde. Máxima favorita.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-fire">🔥 FUEGO</span><br><span class="pick-desc">España marca <span class="pick-odds">+3.5 goles</span> vs Cabo Verde.<br>Over 10.5 corners totales en el partido.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇫🇷</span><div class="team-label"><div class="team-name">Francia</div><div class="team-sub">Mbappe + Olise + Doué</div></div></div></td>
+          <td class="c-green">I</td><td class="c-green">#3</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 65%</span><span class="prob-pill prob-d">E 20%</span><span class="prob-pill prob-l">D 15%</span></div></td>
+          <td class="c-green">2.3</td><td class="c-yellow">0.9</td>
+          <td><span class="ou ou-over">OVER</span></td>
+          <td class="c-yellow">45%</td>
+          <td class="c-yellow">5.4</td>
+          <td class="c-yellow">3.2 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-green">57%</td>
+          <td><div class="form-seq"><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-d">E</div><div class="fb fb-w">G</div></div></td>
+          <td class="dato"><strong>Olise: hat-trick vs Irlanda del Norte</strong> (8 jun 2026). 4G/1E en últimos 5, 14 goles a favor. ¡Potente!</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-fire">🔥 FUEGO</span><br><span class="pick-desc">Olise anota en partido de grupos.<br>Francia gana grupo con <span class="pick-odds">pleno de victorias</span>.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇩🇪</span><div class="team-label"><div class="team-name">Alemania</div><div class="team-sub">4× campeón mundial</div></div></div></td>
+          <td class="c-green">E</td><td class="c-green">#12</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 62%</span><span class="prob-pill prob-d">E 22%</span><span class="prob-pill prob-l">D 16%</span></div></td>
+          <td class="c-green">2.2</td><td class="c-yellow">1.0</td>
+          <td><span class="ou ou-over">OVER</span></td>
+          <td class="c-green">55%</td>
+          <td class="c-yellow">5.3</td>
+          <td class="c-yellow">3.4 <small style="color:var(--muted)">O3.5</small></td>
+          <td class="c-green">59%</td>
+          <td><div class="form-seq"><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-d">E</div><div class="fb fb-w">G</div></div></td>
+          <td class="dato"><strong>Venció a EE.UU. en amistoso 2026.</strong> BTTS en 55% últimos 20. Grupo E muy favorable: Curazao, Ecuador, CdM.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-bomb">💣 BOMBA</span><br><span class="pick-desc">Alemania vs Ecuador: <span class="pick-odds">BTTS + Over 3.5</span>.<br>Ambos anotan, partido abierto.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span><div class="team-label"><div class="team-name">Inglaterra</div><div class="team-sub">Tuchel · 1er WC como DT</div></div></div></td>
+          <td class="c-green">L</td><td class="c-green">#4</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 58%</span><span class="prob-pill prob-d">E 23%</span><span class="prob-pill prob-l">D 19%</span></div></td>
+          <td class="c-yellow">1.8</td><td class="c-yellow">1.0</td>
+          <td><span class="ou ou-under">UNDER</span></td>
+          <td class="c-yellow">42%</td>
+          <td class="c-yellow">5.1</td>
+          <td class="c-yellow">3.3 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-yellow">53%</td>
+          <td><div class="form-seq"><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-d">E</div><div class="fb fb-d">E</div><div class="fb fb-w">G</div></div></td>
+          <td class="dato"><strong>"Toothless without Kane"</strong> (Goal.com). 3-0 vs Costa Rica jun 2026 pero amistosos previos mediocres.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-bomb">💣 BOMBA</span><br><span class="pick-desc">Inglaterra empata <span class="pick-odds">al menos 1 partido</span> de grupo.<br>UNDER 1.5 goles vs Croacia.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇵🇹</span><div class="team-label"><div class="team-name">Portugal</div><div class="team-sub">CR7 posible último WC</div></div></div></td>
+          <td class="c-green">K</td><td class="c-green">#7</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 60%</span><span class="prob-pill prob-d">E 22%</span><span class="prob-pill prob-l">D 18%</span></div></td>
+          <td class="c-green">2.3</td><td class="c-yellow">0.9</td>
+          <td><span class="ou ou-over">OVER</span></td>
+          <td class="c-yellow">48%</td>
+          <td class="c-yellow">5.2</td>
+          <td class="c-yellow">3.1 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-green">55%</td>
+          <td><div class="form-seq"><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-w">G</div></div></td>
+          <td class="dato"><strong>5G seguidas.</strong> 2-1 vs Nigeria (10 jun 2026). Grupo K manejable: DR Congo, Uzbekistán + Colombia.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-fire">🔥 FUEGO</span><br><span class="pick-desc">Cristiano Ronaldo marca en el <span class="pick-odds">primer partido</span>.<br>Portugal Over 2.5 vs DR Congo.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇳🇱</span><div class="team-label"><div class="team-name">Países Bajos</div><div class="team-sub">van Dijk + Gakpo</div></div></div></td>
+          <td class="c-green">F</td><td class="c-yellow">#8</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 58%</span><span class="prob-pill prob-d">E 22%</span><span class="prob-pill prob-l">D 20%</span></div></td>
+          <td class="c-green">2.1</td><td class="c-yellow">1.1</td>
+          <td><span class="ou ou-over">OVER</span></td>
+          <td class="c-yellow">50%</td>
+          <td class="c-yellow">5.3</td>
+          <td class="c-yellow">3.2 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-green">55%</td>
+          <td><div class="form-seq"><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-d">E</div><div class="fb fb-w">G</div><div class="fb fb-w">G</div></div></td>
+          <td class="dato"><strong>OVER 2.5 en 13/20 partidos.</strong> Grupo F con Japón, Suecia y Túnez. 4G en últimos 5 partidos.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-bomb">💣 BOMBA</span><br><span class="pick-desc">Países Bajos vs Japón: <span class="pick-odds">BTTS + Over 2.5</span>.<br>El duelo más abierto del Grupo F.</span></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="source-bar">
+    <span>📊 Fuentes: <strong>FotMob</strong> · <strong>Goal.com Power Rankings</strong> · <strong>FourFourTwo</strong> · <strong>FlashScore</strong></span>
+    <span>Consulta: 12 jun 2026</span>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     UEFA RESTO
+════════════════════════════════════════════ -->
+<section id="uefarest" class="section">
+  <div class="conf-header">
+    <span class="conf-badge">UEFA</span>
+    <div>
+      <div class="conf-title">Europa — Resto del Bloque</div>
+      <div class="conf-meta">Bélgica · Noruega · Austria · Suiza · Croacia · Suecia · Türkiye · Bosnia · Escocia · Chequia</div>
+    </div>
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>EQUIPO</th>
+          <th>GRP</th>
+          <th>FIFA</th>
+          <th>EST. V / E / D %</th>
+          <th>GF/PJ</th>
+          <th>GC/PJ</th>
+          <th>O2.5</th>
+          <th>BTTS%</th>
+          <th>Crnrs⊕</th>
+          <th>Tarj avg</th>
+          <th>Posesión</th>
+          <th>Ult. 5</th>
+          <th>🔥 DATO CALIENTE</th>
+          <th>🎯 PICK ARRIESGADO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇧🇪</span><div class="team-label"><div class="team-name">Bélgica</div><div class="team-sub">De Bruyne capitán</div></div></div></td>
+          <td class="c-green">G</td><td class="c-yellow">#11</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 52%</span><span class="prob-pill prob-d">E 26%</span><span class="prob-pill prob-l">D 22%</span></div></td>
+          <td class="c-yellow">1.9</td><td class="c-yellow">1.1</td>
+          <td><span class="ou ou-over">OVER</span></td>
+          <td class="c-yellow">50%</td><td class="c-yellow">5.0</td>
+          <td class="c-yellow">3.3 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-yellow">52%</td>
+          <td><div class="form-seq"><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-l">P</div><div class="fb fb-w">G</div><div class="fb fb-d">E</div></div></td>
+          <td class="dato"><strong>Destrozó a EE.UU. 5-2</strong> en mar 2026. Grupo G (Irán, Egipto, NZ): el más fácil del torneo.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-fire">🔥 FUEGO</span><br><span class="pick-desc">Bélgica gana los 3 partidos del Grupo G.<br><span class="pick-odds">De Bruyne asiste +2 veces</span> en la fase de grupos.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇳🇴</span><div class="team-label"><div class="team-name">Noruega</div><div class="team-sub">Haaland: 16 goles clas.</div></div></div></td>
+          <td class="c-yellow">I</td><td class="c-yellow">#16</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 40%</span><span class="prob-pill prob-d">E 28%</span><span class="prob-pill prob-l">D 32%</span></div></td>
+          <td class="c-green">2.1</td><td class="c-yellow">1.3</td>
+          <td><span class="ou ou-over">OVER</span></td>
+          <td class="c-green">55%</td><td class="c-yellow">5.0</td>
+          <td class="c-yellow">3.5 <small style="color:var(--muted)">O3.5</small></td>
+          <td class="c-red">44%</td>
+          <td><div class="form-seq"><div class="fb fb-w">G</div><div class="fb fb-d">E</div><div class="fb fb-w">G</div><div class="fb fb-l">P</div><div class="fb fb-d">E</div></div></td>
+          <td class="dato"><strong>Haaland: máximo goleador clasificatorio europeo</strong> (16 goles). Grupo I con Francia: durísimo.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-bomb">💣 BOMBA</span><br><span class="pick-desc">Haaland anota vs Irak o Senegal.<br>Noruega Over 2.5 + <span class="pick-odds">BTTS en al menos 1 partido</span>.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇦🇹</span><div class="team-label"><div class="team-name">Austria</div><div class="team-sub">Arnautovic + Werner</div></div></div></td>
+          <td class="c-yellow">J</td><td class="c-yellow">#25</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 38%</span><span class="prob-pill prob-d">E 28%</span><span class="prob-pill prob-l">D 34%</span></div></td>
+          <td class="c-yellow">1.7</td><td class="c-yellow">1.3</td>
+          <td><span class="ou ou-over">OVER</span></td>
+          <td class="c-yellow">50%</td><td class="c-yellow">5.0</td>
+          <td class="c-yellow">3.4 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-yellow">50%</td>
+          <td><div class="form-seq"><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-d">E</div><div class="fb fb-l">P</div><div class="fb fb-w">G</div></div></td>
+          <td class="dato"><strong>Grupo J con Argentina.</strong> Austria puede disputar el 2do puesto con Argelia. 3G en últimos 5.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-ice">🧊 FRÍO</span><br><span class="pick-desc">Austria empata vs Argelia y <span class="pick-odds">clasifica como 2do</span> del Grupo J sorprendiendo al mundo.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇨🇭</span><div class="team-label"><div class="team-name">Suiza</div><div class="team-sub">Solidez defensiva</div></div></div></td>
+          <td class="c-green">B</td><td class="c-yellow">#21</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 45%</span><span class="prob-pill prob-d">E 30%</span><span class="prob-pill prob-l">D 25%</span></div></td>
+          <td class="c-yellow">1.6</td><td class="c-yellow">1.0</td>
+          <td><span class="ou ou-under">UNDER</span></td>
+          <td class="c-red">38%</td><td class="c-yellow">4.9</td>
+          <td class="c-green">2.9 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-yellow">50%</td>
+          <td><div class="form-seq"><div class="fb fb-w">G</div><div class="fb fb-d">E</div><div class="fb fb-w">G</div><div class="fb fb-d">E</div><div class="fb fb-w">G</div></div></td>
+          <td class="dato"><strong>UNDER 2.5 en 12/20 partidos.</strong> Grupo B con Canadá, Qatar y Bosnia: favorita clara a pasar.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-ice">🧊 FRÍO</span><br><span class="pick-desc">Suiza vs Qatar: <span class="pick-odds">UNDER 1.5 + Clean Sheet</span>.<br>Gana sin recibir gol y con 1 tanto.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇭🇷</span><div class="team-label"><div class="team-name">Croacia</div><div class="team-sub">Modric última danza</div></div></div></td>
+          <td class="c-yellow">L</td><td class="c-yellow">#20</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 40%</span><span class="prob-pill prob-d">E 30%</span><span class="prob-pill prob-l">D 30%</span></div></td>
+          <td class="c-yellow">1.6</td><td class="c-yellow">1.1</td>
+          <td><span class="ou ou-under">UNDER</span></td>
+          <td class="c-red">38%</td><td class="c-yellow">4.8</td>
+          <td class="c-green">2.9 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-yellow">50%</td>
+          <td><div class="form-seq"><div class="fb fb-d">E</div><div class="fb fb-w">G</div><div class="fb fb-d">E</div><div class="fb fb-w">G</div><div class="fb fb-d">E</div></div></td>
+          <td class="dato"><strong>8G · 7E · 5P en últimos 20.</strong> Rival serio para Inglaterra (Grupo L). Modric en su último baile.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-bomb">💣 BOMBA</span><br><span class="pick-desc">Croacia empata o gana a <span class="pick-odds">Inglaterra</span>.<br>UNDER 1.5 + partido muy cerrado.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇸🇪</span><div class="team-label"><div class="team-name">Suecia</div><div class="team-sub">Playoff winner</div></div></div></td>
+          <td class="c-yellow">F</td><td class="c-yellow">#30</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 32%</span><span class="prob-pill prob-d">E 30%</span><span class="prob-pill prob-l">D 38%</span></div></td>
+          <td class="c-yellow">1.5</td><td class="c-yellow">1.3</td>
+          <td><span class="ou ou-under">UNDER</span></td>
+          <td class="c-yellow">45%</td><td class="c-yellow">4.7</td>
+          <td class="c-yellow">3.4 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-red">44%</td>
+          <td><div class="form-seq"><div class="fb fb-l">P</div><div class="fb fb-w">G</div><div class="fb fb-d">E</div><div class="fb fb-w">G</div><div class="fb fb-l">P</div></div></td>
+          <td class="dato"><strong>Clasificó por playoff B.</strong> Grupo F con Países Bajos, Japón, Túnez: lucha abierta por 2do lugar.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-ice">🧊 FRÍO</span><br><span class="pick-desc">Suecia vs Túnez: <span class="pick-odds">UNDER 1.5</span>.<br>Partido aburrido que decide el 3er puesto.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇹🇷</span><div class="team-label"><div class="team-name">Türkiye</div><div class="team-sub">Playoff C winner</div></div></div></td>
+          <td class="c-yellow">D</td><td class="c-yellow">#35</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 35%</span><span class="prob-pill prob-d">E 28%</span><span class="prob-pill prob-l">D 37%</span></div></td>
+          <td class="c-yellow">1.7</td><td class="c-yellow">1.4</td>
+          <td><span class="ou ou-over">OVER</span></td>
+          <td class="c-green">55%</td><td class="c-yellow">5.2</td>
+          <td class="c-red">4.1 <small style="color:var(--muted)">O4.5</small></td>
+          <td class="c-red">43%</td>
+          <td><div class="form-seq"><div class="fb fb-w">G</div><div class="fb fb-l">P</div><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-l">P</div></div></td>
+          <td class="dato"><strong>BTTS en 11/20 partidos + media de tarjetas alta.</strong> Clasificó venciendo a Kosovo en playoff.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-bomb">💣 BOMBA</span><br><span class="pick-desc">Türkiye vs Paraguay: <span class="pick-odds">Over 4.5 tarjetas</span>.<br>Partido intenso con muchas faltas.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇧🇦</span><div class="team-label"><div class="team-name">Bosnia</div><div class="team-sub">Playoff A winner</div></div></div></td>
+          <td class="c-yellow">B</td><td class="c-yellow">#62</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 25%</span><span class="prob-pill prob-d">E 28%</span><span class="prob-pill prob-l">D 47%</span></div></td>
+          <td class="c-yellow">1.5</td><td class="c-red">1.7</td>
+          <td><span class="ou ou-over">OVER</span></td>
+          <td class="c-green">55%</td><td class="c-yellow">4.8</td>
+          <td class="c-red">4.0 <small style="color:var(--muted)">O4.5</small></td>
+          <td class="c-red">42%</td>
+          <td><div class="form-seq"><div class="fb fb-l">P</div><div class="fb fb-w">G</div><div class="fb fb-l">P</div><div class="fb fb-w">G</div><div class="fb fb-l">P</div></div></td>
+          <td class="dato"><strong>Alta media de tarjetas (4.0/PJ).</strong> Regresa al Mundial tras 2014. Grupo B: Suiza y Canadá favoritas.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-bomb">💣 BOMBA</span><br><span class="pick-desc">Bosnia vs Qatar: <span class="pick-odds">Over 5.5 tarjetas totales</span>.<br>Ambas sin nada que perder = partido caliente.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span><div class="team-label"><div class="team-name">Escocia</div><div class="team-sub">Andy Robertson</div></div></div></td>
+          <td class="c-red">C</td><td class="c-yellow">#38</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 22%</span><span class="prob-pill prob-d">E 28%</span><span class="prob-pill prob-l">D 50%</span></div></td>
+          <td class="c-yellow">1.5</td><td class="c-red">1.5</td>
+          <td><span class="ou ou-under">UNDER</span></td>
+          <td class="c-yellow">45%</td><td class="c-yellow">4.8</td>
+          <td class="c-yellow">3.6 <small style="color:var(--muted)">O3.5</small></td>
+          <td class="c-red">44%</td>
+          <td><div class="form-seq"><div class="fb fb-l">P</div><div class="fb fb-l">P</div><div class="fb fb-w">G</div><div class="fb fb-d">E</div><div class="fb fb-l">P</div></div></td>
+          <td class="dato"><strong>Grupo C de la muerte:</strong> Brasil + Marruecos. Solo 2G en últimos 5. Única esperanza: vencer a Haití.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-ice">🧊 FRÍO</span><br><span class="pick-desc">Escocia vs Haití: <span class="pick-odds">Escocia gana a 0</span>.<br>Única victoria posible del grupo, clean sheet.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇨🇿</span><div class="team-label"><div class="team-name">Chequia</div><div class="team-sub">Playoff D winner</div></div></div></td>
+          <td class="c-yellow">A</td><td class="c-yellow">#36</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 30%</span><span class="prob-pill prob-d">E 30%</span><span class="prob-pill prob-l">D 40%</span></div></td>
+          <td class="c-yellow">1.5</td><td class="c-yellow">1.3</td>
+          <td><span class="ou ou-under">UNDER</span></td>
+          <td class="c-yellow">42%</td><td class="c-yellow">4.7</td>
+          <td class="c-yellow">3.3 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-yellow">48%</td>
+          <td><div class="form-seq"><div class="fb fb-w">G</div><div class="fb fb-d">E</div><div class="fb fb-l">P</div><div class="fb fb-w">G</div><div class="fb fb-l">P</div></div></td>
+          <td class="dato"><strong>Grupo A con México (#HOST) y Corea del Sur:</strong> lucha por 2do lugar con los coreanos. Inicio: vs Sudáfrica.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-bomb">💣 BOMBA</span><br><span class="pick-desc">Chequia sorprende a <span class="pick-odds">Corea del Sur</span> en el duelo por el 2do puesto del Grupo A.</span></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="source-bar">
+    <span>📊 Fuentes: <strong>Goal.com Power Rankings</strong> · <strong>ESPN</strong> · <strong>FotMob</strong></span>
+    <span>Consulta: 12 jun 2026</span>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     CAF
+════════════════════════════════════════════ -->
+<section id="caf" class="section">
+  <div class="conf-header">
+    <span class="conf-badge">CAF</span>
+    <div>
+      <div class="conf-title">África — 10 equipos · Récord histórico</div>
+      <div class="conf-meta">Grupos C · E · G · H · I · J · K · L</div>
+    </div>
+  </div>
+  <div class="section-intro">
+    CAF lleva 10 equipos al Mundial, su mayor cuota histórica. <strong style="color:var(--gold)">Marruecos</strong> (4to en 2022) lidera el bloque. Senegal y Costa de Marfil con chances en R16. Argelia llega en racha de 5 victorias seguidas. Ghana en crisis tras 4 derrotas seguidas pre-Mundial.
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>EQUIPO</th>
+          <th>GRP</th>
+          <th>FIFA</th>
+          <th>EST. V / E / D %</th>
+          <th>GF/PJ</th>
+          <th>GC/PJ</th>
+          <th>O2.5</th>
+          <th>BTTS%</th>
+          <th>Crnrs⊕</th>
+          <th>Tarj avg</th>
+          <th>Posesión</th>
+          <th>Ult. 5</th>
+          <th>🔥 DATO CALIENTE</th>
+          <th>🎯 PICK ARRIESGADO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇲🇦</span><div class="team-label"><div class="team-name">Marruecos</div><div class="team-sub">4to en Qatar 2022</div></div></div></td>
+          <td class="c-yellow">C</td><td class="c-green">#13</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 42%</span><span class="prob-pill prob-d">E 30%</span><span class="prob-pill prob-l">D 28%</span></div></td>
+          <td class="c-yellow">1.4</td><td class="c-green">0.8</td>
+          <td><span class="ou ou-under">UNDER</span></td>
+          <td class="c-red">35%</td><td class="c-yellow">5.0</td>
+          <td class="c-green">2.8 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-yellow">50%</td>
+          <td><div class="form-seq"><div class="fb fb-w">G</div><div class="fb fb-d">E</div><div class="fb fb-d">E</div><div class="fb fb-w">G</div><div class="fb fb-d">E</div></div></td>
+          <td class="dato"><strong>Menos de 1 GC/PJ en 2024.</strong> Empató vs Noruega (jun 2026). Mejor defensa de África. Grupo C con Brasil.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-ice">🧊 FRÍO</span><br><span class="pick-desc">Marruecos vs Escocia: <span class="pick-odds">UNDER 1.5 + Marruecos gana a 0</span>.<br>Defensa de élite, partido cerrado.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇸🇳</span><div class="team-label"><div class="team-name">Senegal</div><div class="team-sub">Campeón AFCON 2022</div></div></div></td>
+          <td class="c-yellow">I</td><td class="c-yellow">#20</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 35%</span><span class="prob-pill prob-d">E 28%</span><span class="prob-pill prob-l">D 37%</span></div></td>
+          <td class="c-yellow">1.6</td><td class="c-yellow">1.1</td>
+          <td><span class="ou ou-under">UNDER</span></td>
+          <td class="c-yellow">45%</td><td class="c-yellow">5.0</td>
+          <td class="c-yellow">3.3 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-yellow">47%</td>
+          <td><div class="form-seq"><div class="fb fb-l">P</div><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-d">E</div><div class="fb fb-w">G</div></div></td>
+          <td class="dato"><strong>Cayó ante Brasil 2-0 (nov 2025).</strong> Grupo I con Francia. Mané ausente por lesión crónica. 3G en últimos 4.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-bomb">💣 BOMBA</span><br><span class="pick-desc">Senegal pasa de grupos pese a tener a Francia.<br>Gana los 2 partidos restantes con <span class="pick-odds">BTTS incluido</span>.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇨🇮</span><div class="team-label"><div class="team-name">Costa de Marfil</div><div class="team-sub">Campeona AFCON 2023</div></div></div></td>
+          <td class="c-yellow">E</td><td class="c-yellow">#48</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 30%</span><span class="prob-pill prob-d">E 28%</span><span class="prob-pill prob-l">D 42%</span></div></td>
+          <td class="c-yellow">1.5</td><td class="c-yellow">1.3</td>
+          <td><span class="ou ou-under">UNDER</span></td>
+          <td class="c-yellow">45%</td><td class="c-yellow">4.8</td>
+          <td class="c-yellow">3.5 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-red">44%</td>
+          <td><div class="form-seq"><div class="fb fb-w">G</div><div class="fb fb-l">P</div><div class="fb fb-w">G</div><div class="fb fb-l">P</div><div class="fb fb-w">G</div></div></td>
+          <td class="dato"><strong>Campeona de África 2023.</strong> Grupo E con Alemania es el obstáculo mayor. Haller y Kessié claves.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-fire">🔥 FUEGO</span><br><span class="pick-desc">Costa de Marfil supera a Ecuador y pasa de grupos.<br><span class="pick-odds">Haller marca</span> en al menos 1 partido.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇩🇿</span><div class="team-label"><div class="team-name">Argelia</div><div class="team-sub">En racha de 5 victorias</div></div></div></td>
+          <td class="c-red">J</td><td class="c-yellow">#40</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 28%</span><span class="prob-pill prob-d">E 28%</span><span class="prob-pill prob-l">D 44%</span></div></td>
+          <td class="c-yellow">1.7</td><td class="c-yellow">1.4</td>
+          <td><span class="ou ou-over">OVER</span></td>
+          <td class="c-yellow">50%</td><td class="c-yellow">5.1</td>
+          <td class="c-yellow">3.6 <small style="color:var(--muted)">O3.5</small></td>
+          <td class="c-red">44%</td>
+          <td><div class="form-seq"><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-w">G</div></div></td>
+          <td class="dato"><strong>5G seguidas + vapuleó a Bolivia 4-0</strong> (11 jun 2026). El CAF en mejor forma. Grupo J tiene a Argentina.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-bomb">💣 BOMBA</span><br><span class="pick-desc">Argelia supera a Austria y se clasifica.<br>Partido Argelia vs Austria: <span class="pick-odds">BTTS + Over 2.5</span>.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇪🇬</span><div class="team-label"><div class="team-name">Egipto</div><div class="team-sub">Mo Salah lidera</div></div></div></td>
+          <td class="c-yellow">G</td><td class="c-yellow">#42</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 32%</span><span class="prob-pill prob-d">E 30%</span><span class="prob-pill prob-l">D 38%</span></div></td>
+          <td class="c-yellow">1.4</td><td class="c-yellow">1.2</td>
+          <td><span class="ou ou-under">UNDER</span></td>
+          <td class="c-red">38%</td><td class="c-yellow">4.6</td>
+          <td class="c-yellow">3.2 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-yellow">48%</td>
+          <td><div class="form-seq"><div class="fb fb-d">E</div><div class="fb fb-w">G</div><div class="fb fb-d">E</div><div class="fb fb-w">G</div><div class="fb fb-l">P</div></div></td>
+          <td class="dato"><strong>Mo Salah en su primer y posible único Mundial.</strong> Grupo G con Bélgica. UNDER tendencia clara.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-fire">🔥 FUEGO</span><br><span class="pick-desc">Mo Salah anota vs Irán o Nueva Zelanda.<br>Egipto gana su primer partido con <span class="pick-odds">1-0</span>.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇬🇭</span><div class="team-label"><div class="team-name">Ghana</div><div class="team-sub">En crisis pre-Mundial</div></div></div></td>
+          <td class="c-red">L</td><td class="c-yellow">#55</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 22%</span><span class="prob-pill prob-d">E 25%</span><span class="prob-pill prob-l">D 53%</span></div></td>
+          <td class="c-yellow">1.4</td><td class="c-red">1.6</td>
+          <td><span class="ou ou-over">OVER</span></td>
+          <td class="c-yellow">48%</td><td class="c-yellow">5.0</td>
+          <td class="c-red">3.8 <small style="color:var(--muted)">O3.5</small></td>
+          <td class="c-red">44%</td>
+          <td><div class="form-seq"><div class="fb fb-l">P</div><div class="fb fb-l">P</div><div class="fb fb-l">P</div><div class="fb fb-l">P</div><div class="fb fb-w">G</div></div></td>
+          <td class="dato"><strong>Coach Addo despedido (mar 2026)</strong> tras 4 derrotas seguidas. Grupo L con Inglaterra y Croacia: cuesta arriba.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-bomb">💣 BOMBA</span><br><span class="pick-desc">Ghana provoca una victoria ante <span class="pick-odds">Panamá</span> y genera la sorpresa del Grupo L.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇿🇦</span><div class="team-label"><div class="team-name">Sudáfrica</div><div class="team-sub">Abre el Mundial vs México</div></div></div></td>
+          <td class="c-red">A</td><td class="c-yellow">#58</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 22%</span><span class="prob-pill prob-d">E 28%</span><span class="prob-pill prob-l">D 50%</span></div></td>
+          <td class="c-yellow">1.3</td><td class="c-red">1.5</td>
+          <td><span class="ou ou-under">UNDER</span></td>
+          <td class="c-yellow">42%</td><td class="c-yellow">4.5</td>
+          <td class="c-yellow">3.4 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-red">44%</td>
+          <td><div class="form-seq"><div class="fb fb-l">P</div><div class="fb fb-d">E</div><div class="fb fb-w">G</div><div class="fb fb-l">P</div><div class="fb fb-d">E</div></div></td>
+          <td class="dato"><strong>Primer partido del Mundial 2026</strong> vs México (11 jun, Azteca). Grupo A con México y Corea del Sur.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-bomb">💣 BOMBA</span><br><span class="pick-desc">Sudáfrica empata a México en el partido inaugural.<br>Over 3.5 tarjetas en el debut <span class="pick-odds">(Azteca caliente)</span>.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇹🇳</span><div class="team-label"><div class="team-name">Túnez</div><div class="team-sub">Solidez defensiva</div></div></div></td>
+          <td class="c-yellow">F</td><td class="c-yellow">#35</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 25%</span><span class="prob-pill prob-d">E 33%</span><span class="prob-pill prob-l">D 42%</span></div></td>
+          <td class="c-yellow">1.2</td><td class="c-yellow">1.1</td>
+          <td><span class="ou ou-under">UNDER</span></td>
+          <td class="c-red">35%</td><td class="c-yellow">4.5</td>
+          <td class="c-green">2.8 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-yellow">46%</td>
+          <td><div class="form-seq"><div class="fb fb-d">E</div><div class="fb fb-d">E</div><div class="fb fb-w">G</div><div class="fb fb-d">E</div><div class="fb fb-l">P</div></div></td>
+          <td class="dato"><strong>Empató 1-1 vs Brasil</strong> (nov 2025). Solo 1.2 GF/PJ — muy sólido defensivamente, pobre en ataque.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-ice">🧊 FRÍO</span><br><span class="pick-desc">Túnez vs Suecia: <span class="pick-odds">UNDER 1.5 + No BTTS</span>.<br>Ambas muy defensivas, partido sin goles de mérito.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇨🇻</span><div class="team-label"><div class="team-name">Cabo Verde</div><div class="team-sub">1er Mundial histórico</div></div></div></td>
+          <td class="c-red">H</td><td class="c-yellow">#76</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 18%</span><span class="prob-pill prob-d">E 25%</span><span class="prob-pill prob-l">D 57%</span></div></td>
+          <td class="c-yellow">1.3</td><td class="c-red">1.6</td>
+          <td><span class="ou ou-under">UNDER</span></td>
+          <td class="c-yellow">42%</td><td class="c-yellow">4.5</td>
+          <td class="c-yellow">3.6 <small style="color:var(--muted)">O3.5</small></td>
+          <td class="c-red">44%</td>
+          <td><div class="form-seq"><div class="fb fb-w">G</div><div class="fb fb-l">P</div><div class="fb fb-w">G</div><div class="fb fb-l">P</div><div class="fb fb-l">P</div></div></td>
+          <td class="dato"><strong>Primer Mundial histórico.</strong> Grupo H con España: el más difícil posible. Nación de 600.000 habitantes.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-bomb">💣 BOMBA</span><br><span class="pick-desc">Cabo Verde roba un empate vs <span class="pick-odds">Arabia Saudí</span>.<br>La sorpresa heroica de un debut histórico.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇨🇩</span><div class="team-label"><div class="team-name">DR Congo</div><div class="team-sub">Playoff FP2 winner</div></div></div></td>
+          <td class="c-yellow">K</td><td class="c-yellow">#52</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 25%</span><span class="prob-pill prob-d">E 28%</span><span class="prob-pill prob-l">D 47%</span></div></td>
+          <td class="c-yellow">1.4</td><td class="c-yellow">1.4</td>
+          <td><span class="ou ou-under">UNDER</span></td>
+          <td class="c-yellow">45%</td><td class="c-yellow">4.8</td>
+          <td class="c-yellow">3.8 <small style="color:var(--muted)">O3.5</small></td>
+          <td class="c-red">44%</td>
+          <td><div class="form-seq"><div class="fb fb-w">G</div><div class="fb fb-d">E</div><div class="fb fb-l">P</div><div class="fb fb-w">G</div><div class="fb fb-l">P</div></div></td>
+          <td class="dato"><strong>Clasificó por playoff intercontinental.</strong> Grupo K: Portugal y Colombia como favoritas claras. Pelea por 3ro.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-ice">🧊 FRÍO</span><br><span class="pick-desc">DR Congo vs Uzbekistán: <span class="pick-odds">UNDER 1.5</span>.<br>Duelo de "débiles", partido táctico y cerrado.</span></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="source-bar">
+    <span>📊 Fuentes: <strong>ESPN</strong> · <strong>CBS Sports</strong> · <strong>Goal.com Power Rankings</strong> · <strong>Wikipedia CAF qualification</strong></span>
+    <span>Consulta: 12 jun 2026</span>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     AFC
+════════════════════════════════════════════ -->
+<section id="afc" class="section">
+  <div class="conf-header">
+    <span class="conf-badge">AFC + OFC</span>
+    <div>
+      <div class="conf-title">Asia + Oceanía — 10 equipos</div>
+      <div class="conf-meta">9 AFC + 1 OFC (Nueva Zelanda) · Japón y Corea del Sur son la élite asiática</div>
+    </div>
+  </div>
+  <div class="section-intro">
+    Asia lleva 9 equipos, el doble de Qatar 2022. <strong style="color:var(--gold)">Japón</strong> es la sensación tras vencer a Brasil 3-2. Corea del Sur aspirante seria al R16. Irán muy sólido defensivamente. Arabia Saudí en grupo durísimo con España. Jordan y Uzbekistán en su primer Mundial histórico. Fabio Cannavaro dirige a Uzbekistán.
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>EQUIPO</th>
+          <th>GRP</th>
+          <th>FIFA</th>
+          <th>EST. V / E / D %</th>
+          <th>GF/PJ</th>
+          <th>GC/PJ</th>
+          <th>O2.5</th>
+          <th>BTTS%</th>
+          <th>Crnrs⊕</th>
+          <th>Tarj avg</th>
+          <th>Posesión</th>
+          <th>Ult. 5</th>
+          <th>🔥 DATO CALIENTE</th>
+          <th>🎯 PICK ARRIESGADO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇯🇵</span><div class="team-label"><div class="team-name">Japón</div><div class="team-sub">¡Venció a Brasil 3-2!</div></div></div></td>
+          <td class="c-green">F</td><td class="c-yellow">#18</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 40%</span><span class="prob-pill prob-d">E 28%</span><span class="prob-pill prob-l">D 32%</span></div></td>
+          <td class="c-green">2.0</td><td class="c-yellow">1.2</td>
+          <td><span class="ou ou-over">OVER</span></td>
+          <td class="c-green">55%</td><td class="c-yellow">5.1</td>
+          <td class="c-yellow">3.2 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-yellow">50%</td>
+          <td><div class="form-seq"><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-l">P</div></div></td>
+          <td class="dato"><strong>¡Venció a Brasil 3-2 en oct 2025!</strong> Mayor sorpresa del pre-Mundial. Grupo F con Países Bajos.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-fire">🔥 FUEGO</span><br><span class="pick-desc">Japón pasa de grupos como <span class="pick-odds">2do</span> detrás de Países Bajos.<br>BTTS en su partido vs Suecia.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇰🇷</span><div class="team-label"><div class="team-name">Corea del Sur</div><div class="team-sub">Hwang Heechan</div></div></div></td>
+          <td class="c-yellow">A</td><td class="c-yellow">#22</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 38%</span><span class="prob-pill prob-d">E 28%</span><span class="prob-pill prob-l">D 34%</span></div></td>
+          <td class="c-yellow">1.8</td><td class="c-yellow">1.2</td>
+          <td><span class="ou ou-under">UNDER</span></td>
+          <td class="c-yellow">48%</td><td class="c-yellow">5.0</td>
+          <td class="c-yellow">3.3 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-yellow">50%</td>
+          <td><div class="form-seq"><div class="fb fb-w">G</div><div class="fb fb-d">E</div><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-l">P</div></div></td>
+          <td class="dato"><strong>Goleó 5-0 a Brasil</strong> en oct 2025 (amistoso). Grupo A con México: candidata al 2do lugar.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-fire">🔥 FUEGO</span><br><span class="pick-desc">Corea del Sur clasifica 2da del Grupo A.<br><span class="pick-odds">Gana a Chequia y Sudáfrica</span> en partidos de grupo.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇮🇷</span><div class="team-label"><div class="team-name">Irán</div><div class="team-sub">Queiroz DT · Taremi</div></div></div></td>
+          <td class="c-yellow">G</td><td class="c-yellow">#24</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 35%</span><span class="prob-pill prob-d">E 30%</span><span class="prob-pill prob-l">D 35%</span></div></td>
+          <td class="c-yellow">1.5</td><td class="c-yellow">1.2</td>
+          <td><span class="ou ou-under">UNDER</span></td>
+          <td class="c-yellow">42%</td><td class="c-yellow">4.8</td>
+          <td class="c-yellow">3.5 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-yellow">48%</td>
+          <td><div class="form-seq"><div class="fb fb-d">E</div><div class="fb fb-w">G</div><div class="fb fb-d">E</div><div class="fb fb-w">G</div><div class="fb fb-d">E</div></div></td>
+          <td class="dato"><strong>Solo 2 derrotas en 20 partidos.</strong> Grupo G con Bélgica y Egipto. Muy sólido atrás, UNDER tendencia.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-ice">🧊 FRÍO</span><br><span class="pick-desc">Irán vs Nueva Zelanda: <span class="pick-odds">UNDER 1.5 + Irán gana a 0</span>.<br>Defensiva asfixiante, partido muy cerrado.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇦🇺</span><div class="team-label"><div class="team-name">Australia</div><div class="team-sub">Socceroos</div></div></div></td>
+          <td class="c-yellow">D</td><td class="c-yellow">#25</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 32%</span><span class="prob-pill prob-d">E 28%</span><span class="prob-pill prob-l">D 40%</span></div></td>
+          <td class="c-yellow">1.5</td><td class="c-yellow">1.3</td>
+          <td><span class="ou ou-under">UNDER</span></td>
+          <td class="c-yellow">40%</td><td class="c-yellow">4.8</td>
+          <td class="c-yellow">3.4 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-yellow">48%</td>
+          <td><div class="form-seq"><div class="fb fb-w">G</div><div class="fb fb-d">E</div><div class="fb fb-l">P</div><div class="fb fb-w">G</div><div class="fb fb-d">E</div></div></td>
+          <td class="dato"><strong>Grupo D con EE.UU. y Türkiye:</strong> complicado. Se jugó amistoso vs Argentina (nov 2025) como preparación.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-bomb">💣 BOMBA</span><br><span class="pick-desc">Australia empata o gana a <span class="pick-odds">Türkiye</span>.<br>Partido físico con Over 3.5 tarjetas totales.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇸🇦</span><div class="team-label"><div class="team-name">Arabia Saudí</div><div class="team-sub">Al-Dawsari</div></div></div></td>
+          <td class="c-red">H</td><td class="c-yellow">#56</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 22%</span><span class="prob-pill prob-d">E 28%</span><span class="prob-pill prob-l">D 50%</span></div></td>
+          <td class="c-yellow">1.3</td><td class="c-red">1.6</td>
+          <td><span class="ou ou-under">UNDER</span></td>
+          <td class="c-yellow">42%</td><td class="c-yellow">4.7</td>
+          <td class="c-yellow">3.5 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-red">44%</td>
+          <td><div class="form-seq"><div class="fb fb-l">P</div><div class="fb fb-w">G</div><div class="fb fb-l">P</div><div class="fb fb-d">E</div><div class="fb fb-l">P</div></div></td>
+          <td class="dato"><strong>Grupo H durísimo: España + Uruguay.</strong> Solo 3 victorias en últimos 10 partidos. Chances muy bajas.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-bomb">💣 BOMBA</span><br><span class="pick-desc">Arabia Saudí provoca un <span class="pick-odds">empate frente a Uruguay</span>.<br>UNDER 1.5 en ese partido.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇶🇦</span><div class="team-label"><div class="team-name">Qatar</div><div class="team-sub">Organizador 2022</div></div></div></td>
+          <td class="c-red">B</td><td class="c-yellow">#55</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 20%</span><span class="prob-pill prob-d">E 25%</span><span class="prob-pill prob-l">D 55%</span></div></td>
+          <td class="c-yellow">1.3</td><td class="c-red">1.7</td>
+          <td><span class="ou ou-over">OVER</span></td>
+          <td class="c-yellow">45%</td><td class="c-yellow">4.8</td>
+          <td class="c-yellow">3.8 <small style="color:var(--muted)">O4.5</small></td>
+          <td class="c-red">42%</td>
+          <td><div class="form-seq"><div class="fb fb-l">P</div><div class="fb fb-l">P</div><div class="fb fb-d">E</div><div class="fb fb-w">G</div><div class="fb fb-l">P</div></div></td>
+          <td class="dato"><strong>Último de Qatar 2022 (0 puntos).</strong> Recibió a Argentina en amistoso (mar 2026). Grupo B con Suiza y Canadá.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-bomb">💣 BOMBA</span><br><span class="pick-desc">Qatar vs Bosnia: partido con <span class="pick-odds">Over 5.5 tarjetas</span>.<br>Duelo explosivo entre los "peores" del grupo.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇮🇶</span><div class="team-label"><div class="team-name">Irak</div><div class="team-sub">Debut en mundiales</div></div></div></td>
+          <td class="c-yellow">I</td><td class="c-yellow">#58</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 22%</span><span class="prob-pill prob-d">E 28%</span><span class="prob-pill prob-l">D 50%</span></div></td>
+          <td class="c-yellow">1.4</td><td class="c-yellow">1.4</td>
+          <td><span class="ou ou-under">UNDER</span></td>
+          <td class="c-yellow">42%</td><td class="c-yellow">4.7</td>
+          <td class="c-yellow">3.6 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-red">44%</td>
+          <td><div class="form-seq"><div class="fb fb-w">G</div><div class="fb fb-d">E</div><div class="fb fb-l">P</div><div class="fb fb-w">G</div><div class="fb fb-l">P</div></div></td>
+          <td class="dato"><strong>Grupo I con Francia:</strong> el más difícil posible. Puede pelear con Noruega por el 2do puesto grupal.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-bomb">💣 BOMBA</span><br><span class="pick-desc">Irak da la sorpresa y <span class="pick-odds">empata con Noruega</span>.<br>Over 4 tarjetas en ese partido tenso.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇯🇴</span><div class="team-label"><div class="team-name">Jordania</div><div class="team-sub">1er Mundial histórico</div></div></div></td>
+          <td class="c-red">J</td><td class="c-yellow">#70</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 15%</span><span class="prob-pill prob-d">E 25%</span><span class="prob-pill prob-l">D 60%</span></div></td>
+          <td class="c-red">1.1</td><td class="c-red">1.6</td>
+          <td><span class="ou ou-under">UNDER</span></td>
+          <td class="c-red">35%</td><td class="c-yellow">4.5</td>
+          <td class="c-yellow">3.5 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-red">44%</td>
+          <td><div class="form-seq"><div class="fb fb-l">P</div><div class="fb fb-l">P</div><div class="fb fb-d">E</div><div class="fb fb-l">P</div><div class="fb fb-w">G</div></div></td>
+          <td class="dato"><strong>Primer Mundial histórico.</strong> Grupo J con Argentina. Objetivo: al menos un punto. Solo 4G en 20 partidos.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-ice">🧊 FRÍO</span><br><span class="pick-desc">Jordania vs Argelia: <span class="pick-odds">UNDER 1.5</span>.<br>Partido muy cerrado, empate o victoria mínima.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇺🇿</span><div class="team-label"><div class="team-name">Uzbekistán</div><div class="team-sub">Cannavaro DT · Debut</div></div></div></td>
+          <td class="c-red">K</td><td class="c-yellow">#65</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 18%</span><span class="prob-pill prob-d">E 25%</span><span class="prob-pill prob-l">D 57%</span></div></td>
+          <td class="c-yellow">1.3</td><td class="c-red">1.6</td>
+          <td><span class="ou ou-under">UNDER</span></td>
+          <td class="c-yellow">40%</td><td class="c-yellow">4.5</td>
+          <td class="c-yellow">3.5 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-red">43%</td>
+          <td><div class="form-seq"><div class="fb fb-w">G</div><div class="fb fb-d">E</div><div class="fb fb-w">G</div><div class="fb fb-l">P</div><div class="fb fb-l">P</div></div></td>
+          <td class="dato"><strong>Fabio Cannavaro (campeón mundial 2006) es el DT.</strong> Debut histórico. Grupo K: Portugal y Colombia son favoritas.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-bomb">💣 BOMBA</span><br><span class="pick-desc">Uzbekistán aguanta ante Colombia:<span class="pick-odds"> empate histórico</span>.<br>UNDER 1.5 + Uzb no pierde por más de 1 gol.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇳🇿</span><div class="team-label"><div class="team-name">Nueva Zelanda</div><div class="team-sub">All Whites · OFC</div></div></div></td>
+          <td class="c-red">G</td><td class="c-yellow">#88</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 15%</span><span class="prob-pill prob-d">E 22%</span><span class="prob-pill prob-l">D 63%</span></div></td>
+          <td class="c-red">1.0</td><td class="c-red">1.7</td>
+          <td><span class="ou ou-under">UNDER</span></td>
+          <td class="c-red">35%</td><td class="c-yellow">4.5</td>
+          <td class="c-yellow">3.5 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-red">44%</td>
+          <td><div class="form-seq"><div class="fb fb-l">P</div><div class="fb fb-l">P</div><div class="fb fb-d">E</div><div class="fb fb-l">P</div><div class="fb fb-l">P</div></div></td>
+          <td class="dato"><strong>Primera vez con plaza directa de Oceanía</strong> sin playoff. Grupo G con Bélgica e Irán. 1G en últimos 5.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-ice">🧊 FRÍO</span><br><span class="pick-desc">Nueva Zelanda vs Irán: <span class="pick-odds">UNDER 1.5</span> y<br>ambas marchan 0 puntos al último partido.</span></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="source-bar">
+    <span>📊 Fuentes: <strong>FotMob</strong> · <strong>Goal.com</strong> · <strong>Yahoo Sports</strong> · <strong>Wikipedia AFC qualification</strong></span>
+    <span>Consulta: 12 jun 2026</span>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     CONCACAF
+════════════════════════════════════════════ -->
+<section id="concacaf" class="section">
+  <div class="conf-header">
+    <span class="conf-badge">CONCACAF</span>
+    <div>
+      <div class="conf-title">CONCACAF — 6 equipos</div>
+      <div class="conf-meta">3 anfitriones automáticos + Panamá, Haití, Curazao</div>
+    </div>
+  </div>
+  <div class="section-intro">
+    Los 3 anfitriones tienen ventaja de local y motivación extra. <strong style="color:var(--gold)">Canadá</strong> llega en su mejor momento histórico (venció a EE.UU. y México). <strong style="color:var(--gold)">México</strong> abrió el torneo vs Sudáfrica en el Azteca. EE.UU. con resultados mixtos pero en su casa. Curazao: la nación más pequeña (185.000 hab) en la historia del Mundial.
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>EQUIPO</th>
+          <th>GRP</th>
+          <th>FIFA</th>
+          <th>EST. V / E / D %</th>
+          <th>GF/PJ</th>
+          <th>GC/PJ</th>
+          <th>O2.5</th>
+          <th>BTTS%</th>
+          <th>Crnrs⊕</th>
+          <th>Tarj avg</th>
+          <th>Posesión</th>
+          <th>Ult. 5</th>
+          <th>🔥 DATO CALIENTE</th>
+          <th>🎯 PICK ARRIESGADO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇺🇸</span><div class="team-label"><div class="team-name">EE.UU.</div><div class="team-sub">Anfitrión · Pochettino DT</div></div></div></td>
+          <td class="c-yellow">D</td><td class="c-yellow">#13</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 48%</span><span class="prob-pill prob-d">E 28%</span><span class="prob-pill prob-l">D 24%</span></div></td>
+          <td class="c-yellow">1.8</td><td class="c-yellow">1.3</td>
+          <td><span class="ou ou-over">OVER</span></td>
+          <td class="c-yellow">50%</td><td class="c-yellow">5.3</td>
+          <td class="c-yellow">3.4 <small style="color:var(--muted)">O3.5</small></td>
+          <td class="c-yellow">51%</td>
+          <td><div class="form-seq"><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-l">P</div><div class="fb fb-l">P</div><div class="fb fb-w">G</div></div></td>
+          <td class="dato"><strong>Vapuleó a Uruguay 5-1 en 2025</strong> pero perdió 5-2 vs Bélgica y vs Alemania. Pulisic: 1er gol 2026 vs Senegal.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-fire">🔥 FUEGO</span><br><span class="pick-desc">EE.UU. gana el Grupo D jugando en <span class="pick-odds">casa con el público</span>.<br>Pulisic anota en al menos 2 partidos de grupo.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇲🇽</span><div class="team-label"><div class="team-name">México</div><div class="team-sub">Anfitrión · Aguirre DT</div></div></div></td>
+          <td class="c-yellow">A</td><td class="c-yellow">#17</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 45%</span><span class="prob-pill prob-d">E 28%</span><span class="prob-pill prob-l">D 27%</span></div></td>
+          <td class="c-yellow">1.7</td><td class="c-yellow">1.2</td>
+          <td><span class="ou ou-under">UNDER</span></td>
+          <td class="c-yellow">45%</td><td class="c-yellow">5.2</td>
+          <td class="c-yellow">3.3 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-yellow">51%</td>
+          <td><div class="form-seq"><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-d">E</div><div class="fb fb-w">G</div><div class="fb fb-l">P</div></div></td>
+          <td class="dato"><strong>Ganó el Gold Cup 2025.</strong> Jiménez marcó en la apertura vs Sudáfrica (Azteca). Fanático local como 12vo.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-fire">🔥 FUEGO</span><br><span class="pick-desc">México gana los 3 partidos del Grupo A.<br><span class="pick-odds">Jiménez anota 2+ goles</span> en la fase de grupos.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇨🇦</span><div class="team-label"><div class="team-name">Canadá</div><div class="team-sub">Anfitrión · Davies + David</div></div></div></td>
+          <td class="c-green">B</td><td class="c-yellow">#40</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 42%</span><span class="prob-pill prob-d">E 28%</span><span class="prob-pill prob-l">D 30%</span></div></td>
+          <td class="c-green">1.9</td><td class="c-yellow">1.2</td>
+          <td><span class="ou ou-over">OVER</span></td>
+          <td class="c-yellow">50%</td><td class="c-yellow">5.1</td>
+          <td class="c-yellow">3.3 <small style="color:var(--muted)">U3.5</small></td>
+          <td class="c-yellow">49%</td>
+          <td><div class="form-seq"><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-w">G</div><div class="fb fb-d">E</div><div class="fb fb-w">G</div></div></td>
+          <td class="dato"><strong>Venció a EE.UU. y México</strong> en CONCACAF Nations League. Davies + David = dupla de lujo. Mejor momento histórico.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-fire">🔥 FUEGO</span><br><span class="pick-desc">Canadá pasa como <span class="pick-odds">1ero del Grupo B</span>.<br>Jonathan David termina como goleador de su grupo.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇵🇦</span><div class="team-label"><div class="team-name">Panamá</div><div class="team-sub">2da Copa del Mundo</div></div></div></td>
+          <td class="c-red">L</td><td class="c-yellow">#65</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 20%</span><span class="prob-pill prob-d">E 28%</span><span class="prob-pill prob-l">D 52%</span></div></td>
+          <td class="c-yellow">1.3</td><td class="c-red">1.6</td>
+          <td><span class="ou ou-under">UNDER</span></td>
+          <td class="c-yellow">42%</td><td class="c-yellow">4.6</td>
+          <td class="c-yellow">3.8 <small style="color:var(--muted)">O3.5</small></td>
+          <td class="c-red">44%</td>
+          <td><div class="form-seq"><div class="fb fb-w">G</div><div class="fb fb-l">P</div><div class="fb fb-d">E</div><div class="fb fb-l">P</div><div class="fb fb-w">G</div></div></td>
+          <td class="dato"><strong>Venció a EE.UU. en Nations League 2024.</strong> Grupo L con Inglaterra y Croacia: lucha por el 3er puesto.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-bomb">💣 BOMBA</span><br><span class="pick-desc">Panamá da la sorpresa: <span class="pick-odds">empata o gana a Ghana</span>.<br>Repite la hazaña de venzerle a EE.UU.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇭🇹</span><div class="team-label"><div class="team-name">Haití</div><div class="team-sub">Debut histórico</div></div></div></td>
+          <td class="c-red">C</td><td class="c-yellow">#92</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 12%</span><span class="prob-pill prob-d">E 22%</span><span class="prob-pill prob-l">D 66%</span></div></td>
+          <td class="c-red">1.0</td><td class="c-red">1.8</td>
+          <td><span class="ou ou-under">UNDER</span></td>
+          <td class="c-yellow">45%</td><td class="c-yellow">4.5</td>
+          <td class="c-red">3.9 <small style="color:var(--muted)">O4.5</small></td>
+          <td class="c-red">42%</td>
+          <td><div class="form-seq"><div class="fb fb-l">P</div><div class="fb fb-l">P</div><div class="fb fb-l">P</div><div class="fb fb-d">E</div><div class="fb fb-l">P</div></div></td>
+          <td class="dato"><strong>Primer Mundial histórico.</strong> Grupo C con Brasil es una sentencia. Única esperanza: partido vs Escocia.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-bomb">💣 BOMBA</span><br><span class="pick-desc">Haití vs Escocia: <span class="pick-odds">Over 4.5 tarjetas</span>.<br>El partido más caliente del Grupo C por el orgullo.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="team-cell"><span class="crest">🇨🇼</span><div class="team-label"><div class="team-name">Curazao</div><div class="team-sub">Nación más pequeña</div></div></div></td>
+          <td class="c-red">E</td><td class="c-yellow">#80</td>
+          <td><div class="prob-cell"><span class="prob-pill prob-w">V 10%</span><span class="prob-pill prob-d">E 22%</span><span class="prob-pill prob-l">D 68%</span></div></td>
+          <td class="c-red">0.9</td><td class="c-red">1.8</td>
+          <td><span class="ou ou-under">UNDER</span></td>
+          <td class="c-red">35%</td><td class="c-yellow">4.3</td>
+          <td class="c-red">3.8 <small style="color:var(--muted)">O4.5</small></td>
+          <td class="c-red">42%</td>
+          <td><div class="form-seq"><div class="fb fb-l">P</div><div class="fb fb-l">P</div><div class="fb fb-w">G</div><div class="fb fb-l">P</div><div class="fb fb-l">P</div></div></td>
+          <td class="dato"><strong>185.000 habitantes = nación más pequeña del Mundial.</strong> Grupo E: Alemania, Ecuador, Costa de Marfil. Dificilísimo.</td>
+          <td><div class="pick-bold"><span class="pick-tag pick-tag-bomb">💣 BOMBA</span><br><span class="pick-desc">Curazao vs Ecuador: <span class="pick-odds">Over 3.5 goles</span>.<br>Ecuador golpea duro a la nación más pequeña.</span></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="source-bar">
+    <span>📊 Fuentes: <strong>Goal.com Power Rankings</strong> · <strong>CBS Sports</strong> · <strong>Ritfitsports</strong> · <strong>FlashScore</strong></span>
+    <span>Consulta: 12 jun 2026</span>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     TOP PICKS
+════════════════════════════════════════════ -->
+<section id="toppicks" class="section">
+  <div class="conf-header">
+    <span class="conf-badge" style="background:#dc2626;color:#fff">🔥 HOT</span>
+    <div>
+      <div class="conf-title">TOP PICKS — Equipos en mejor forma</div>
+      <div class="conf-meta">Ranking de forma reciente + datos más jugables del torneo</div>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    <strong>⚠️ RECORDATORIO:</strong> Estos "picks" son una <strong>evaluación de forma reciente</strong> como ejercicio de análisis entre amigos. <strong>NO son pronósticos ni consejos de apuestas.</strong> El fútbol es impredecible.
+  </div>
+
+  <div class="picks-grid">
+    <div class="pick-card gold">
+      <div class="pick-num">1</div>
+      <div class="pick-crest">🇪🇸</div>
+      <div class="pick-name">España</div>
+      <div class="pick-meta">Grupo H · FIFA #1 · Campeona Euro 2024</div>
+      <div class="pick-stat">✅ 5G seguidas · 64% posesión promedio</div>
+      <div class="pick-stat">✅ 2.5 GF/PJ · Yamal regresa vs Cabo Verde</div>
+      <div class="pick-dato">🔥 5/5 partidos ganados + grupo facilísimo (Uruguay, Arabia Saudí, Cabo Verde). La máquina de De La Fuente no para.</div>
+    </div>
+
+    <div class="pick-card gold">
+      <div class="pick-num">2</div>
+      <div class="pick-crest">🇦🇷</div>
+      <div class="pick-name">Argentina</div>
+      <div class="pick-meta">Grupo J · FIFA #2 · Campeón defensor</div>
+      <div class="pick-stat">✅ Marcó en 18/20 partidos · 2.4 GF/PJ</div>
+      <div class="pick-stat">✅ Messi volvió de lesión con gol (9 jun 2026)</div>
+      <div class="pick-dato">🔥 Grupo J (Argelia, Austria, Jordania): pasaje casi garantizado. Messi en uno de sus últimos Mundiales. Defensiva de élite (0.6 GC/PJ).</div>
+    </div>
+
+    <div class="pick-card gold">
+      <div class="pick-num">3</div>
+      <div class="pick-crest">🇫🇷</div>
+      <div class="pick-name">Francia</div>
+      <div class="pick-meta">Grupo I · FIFA #3 · Mbappe capitán</div>
+      <div class="pick-stat">✅ 4G/1E últimos 5 · Olise hat-trick (8 jun)</div>
+      <div class="pick-stat">✅ 14 goles a favor en últimos 5 partidos</div>
+      <div class="pick-dato">🔥 Olise marcó 3 goles en el último amistoso. Mbappe + Doué + Dembélé = ataque imparable. Candidata más completa al título.</div>
+    </div>
+
+    <div class="pick-card silver">
+      <div class="pick-num">4</div>
+      <div class="pick-crest">🇵🇹</div>
+      <div class="pick-name">Portugal</div>
+      <div class="pick-meta">Grupo K · FIFA #7 · CR7 último Mundial</div>
+      <div class="pick-stat">✅ 5G seguidas · 2-1 vs Nigeria (10 jun 2026)</div>
+      <div class="pick-stat">✅ OVER 2.5 en 13/20 últimos partidos</div>
+      <div class="pick-dato">🔥 CR7 en su último Mundial: motivado al máximo. Grupo K muy tratable. 5 victorias consecutivas entrando al torneo.</div>
+    </div>
+
+    <div class="pick-card silver">
+      <div class="pick-num">5</div>
+      <div class="pick-crest">🇯🇵</div>
+      <div class="pick-name">Japón</div>
+      <div class="pick-meta">Grupo F · FIFA #18 · Mayor sorpresa pre-Mundial</div>
+      <div class="pick-stat">✅ ¡Venció a Brasil 3-2 en oct 2025!</div>
+      <div class="pick-stat">✅ 4G/1P en últimos 5 · BTTS 55%</div>
+      <div class="pick-dato">🔥 La mayor sorpresa del pre-Mundial: venció a Brasil 3-2. Grupo F con Países Bajos: 2do lugar muy alcanzable. OVER tendencia fuerte.</div>
+    </div>
+
+    <div class="pick-card silver">
+      <div class="pick-num">6</div>
+      <div class="pick-crest">🇩🇪</div>
+      <div class="pick-name">Alemania</div>
+      <div class="pick-meta">Grupo E · FIFA #12 · Resurgimiento</div>
+      <div class="pick-stat">✅ 4G/1E en últimos 5 · Venció a EE.UU.</div>
+      <div class="pick-stat">✅ BTTS en 55% · Grupo E muy favorable</div>
+      <div class="pick-dato">🔥 Grupo E (Curazao, Ecuador, Costa de Marfil): el más fácil para una grande. Alemania clasificaría sin dificultades y llegaría de atrás.</div>
+    </div>
+
+    <div class="pick-card bronze">
+      <div class="pick-num">7</div>
+      <div class="pick-crest">🇧🇪</div>
+      <div class="pick-name">Bélgica</div>
+      <div class="pick-meta">Grupo G · FIFA #11 · De Bruyne</div>
+      <div class="pick-stat">✅ Destruyó a EE.UU. 5-2 (mar 2026)</div>
+      <div class="pick-stat">✅ Grupo G más fácil del torneo (Irán, Egipto, NZ)</div>
+      <div class="pick-dato">🔥 5-2 vs EE.UU. en Atlanta. Grupo G como el más fácil de todos. Bélgica debería llegar lejos antes de chocar con un gigante.</div>
+    </div>
+
+    <div class="pick-card bronze">
+      <div class="pick-num">8</div>
+      <div class="pick-crest">🇩🇿</div>
+      <div class="pick-name">Argelia</div>
+      <div class="pick-meta">Grupo J · CAF · En racha de 5 victorias</div>
+      <div class="pick-stat">✅ 5G seguidas + 4-0 vs Bolivia (11 jun)</div>
+      <div class="pick-stat">✅ El equipo africano en mejor forma del torneo</div>
+      <div class="pick-dato">🔥 5 victorias seguidas entrando al Mundial. Disputa el 2do puesto del Grupo J con Austria. Dato caliente de un "outsider" africano.</div>
+    </div>
+
+    <div class="pick-card bronze">
+      <div class="pick-num">9</div>
+      <div class="pick-crest">🇨🇦</div>
+      <div class="pick-name">Canadá</div>
+      <div class="pick-meta">Grupo B · Anfitrión · Davies + David</div>
+      <div class="pick-stat">✅ 4G/1E en últimos 5 · Venció a EE.UU. y México</div>
+      <div class="pick-stat">✅ Grupo B: Suiza, Qatar, Bosnia — muy favorable</div>
+      <div class="pick-dato">🔥 Mejor momento histórico del fútbol canadiense. Anfitrión con fanáticos y el dupla Davies + David. Podría dar la sorpresa grande del torneo.</div>
+    </div>
+
+    <div class="pick-card blue">
+      <div class="pick-num">10</div>
+      <div class="pick-crest">🇲🇦</div>
+      <div class="pick-name">Marruecos</div>
+      <div class="pick-meta">Grupo C · CAF · 4to en Qatar 2022</div>
+      <div class="pick-stat">✅ Menos de 1 GC/PJ · Mejor defensa de África</div>
+      <div class="pick-stat">✅ UNDER 2.5 tendencia fuerte (12/20 partidos)</div>
+      <div class="pick-dato">🔥 La mejor defensa de África. Si Brasil tiene un mal día, Marruecos puede volver a ser la revelación africana del torneo.</div>
+    </div>
+  </div>
+
+  <div style="margin-top:20px; padding:16px; background:var(--card); border:1px solid var(--border); border-radius:8px;">
+    <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:18px;color:var(--gold);margin-bottom:14px;letter-spacing:1px;">📊 STATS MÁS JUGABLES DEL TORNEO</h3>
+    <div class="stats-boxes">
+      <div class="stat-box" style="background:#041a0e;border-color:#0a3d1e;color:#4ade80;">
+        <strong>OVER 2.5 tendencia:</strong><br>España, Francia, Alemania, Argentina, Japón, Noruega, Portugal — partidos con goles.
+      </div>
+      <div class="stat-box" style="background:#0c1428;border-color:#1a2a50;color:#93c5fd;">
+        <strong>UNDER 2.5 tendencia:</strong><br>Marruecos, Uruguay, Suiza, Croacia, Irán, Túnez, Egipto — partidos cerrados.
+      </div>
+      <div class="stat-box" style="background:#1f0505;border-color:#3a0808;color:#f87171;">
+        <strong>BAJO BTTS%:</strong><br>Marruecos, Túnez, Nueva Zelanda, Jordania — "No marcan ambos" con frecuencia.
+      </div>
+      <div class="stat-box" style="background:#2a1800;border-color:#4a2a00;color:#fde047;">
+        <strong>ALTO BTTS%:</strong><br>Alemania, Noruega, Bélgica, Türkiye, Bosnia — "Marcan ambos" seguido.
+      </div>
+      <div class="stat-box" style="background:#0e1420;border-color:#1a2540;color:#8496b0;">
+        <strong>TARJETAS ALTAS (O4.5):</strong><br>Bosnia, Türkiye, Haití, Curazao, Qatar — partidos con muchas amonestaciones.
+      </div>
+      <div class="stat-box" style="background:#0e1420;border-color:#1a2540;color:#8496b0;">
+        <strong>CORNERS ALTOS (O9.5):</strong><br>España (6.2/PJ), Alemania, Francia, Argentina, Inglaterra — generan muchos saques de esquina.
+      </div>
+    </div>
+  </div>
+
+  <div class="source-bar" style="margin-top:12px;">
+    <span><strong style="color:var(--red)">⚠️ Solo entretenimiento entre amigos. NO es asesoramiento de apuestas.</strong></span>
+    <span>Fuentes: FotMob · Goal.com · ESPN · CBS Sports · Sofascore · FlashScore · WorldSoccerTalk · NBC Sports · Yahoo Sports · FourFourTwo · Britannica</span>
+    <span>Fecha: <strong>12 de junio de 2026</strong></span>
+  </div>
+</section>
+
+</div><!-- /content -->
+
+<script>
+function showTab(tabId) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  event.currentTarget.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
